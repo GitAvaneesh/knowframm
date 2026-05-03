@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Framm | Modern C++ UI Engine</title>
+    <meta name="description" content="Framm is a modern, performance-oriented C++ UI engine built for developers who demand control, clarity, and efficient native interfaces." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+
+    <!-- LOADER -->
+    <div class="loader" id="loader">
+      <div class="loader-inner">
+        <span class="loader-logo">FRAMM</span>
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+        <span class="loader-status">Initializing engine...</span>
+      </div>
+    </div>
+
+    <!-- CURSOR -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <div class="page-shell">
+
+      <!-- TOPBAR -->
+      <header class="topbar" id="topbar">
+        <a class="brand" href="#overview">
+          <span class="brand-icon">▲</span>
+          <span>Framm</span>
+        </a>
+        <nav class="nav-links">
+          <a href="#problem" class="nav-link">Problem</a>
+          <a href="#approach" class="nav-link">Approach</a>
+          <a href="#performance" class="nav-link">Performance</a>
+          <a href="#architecture" class="nav-link">Architecture</a>
+          <a href="#code" class="nav-link">Code</a>
+          <a href="#philosophy" class="nav-link">Philosophy</a>
+          <a href="https://github.com/GitAvaneesh/framm" class="nav-link nav-gh" target="_blank">GitHub ↗</a>
+        </nav>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+
+      <!-- MOBILE NAV -->
+      <div class="mobile-nav" id="mobileNav">
+        <a href="#problem">Problem</a>
+        <a href="#approach">Approach</a>
+        <a href="#performance">Performance</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#code">Code</a>
+        <a href="#philosophy">Philosophy</a>
+        <a href="https://github.com/GitAvaneesh/framm" target="_blank">GitHub ↗</a>
+      </div>
+
+      <main>
+
+        <!-- ═══════════════════════ HERO ═══════════════════════ -->
+        <section class="hero section" id="overview">
+          <div class="hero-bg">
+            <div class="grid-overlay"></div>
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+          </div>
+
+          <div class="hero-content">
+            <div class="hero-copy reveal">
+              <div class="eyebrow-wrap">
+                <span class="dot-live"></span>
+                <p class="eyebrow">Coming soon · in active development</p>
+              </div>
+              <h1 class="hero-title">
+                <span class="title-line">A UI engine</span>
+                <span class="title-line title-accent">built for C++</span>
+                <span class="title-line">developers.</span>
+              </h1>
+              <p class="hero-text">
+                Framm is designed specifically for developers who demand both control and efficiency when building native software interfaces. It is not positioned as just another UI toolkit or experimental library, but rather as a carefully engineered foundation for professional-grade applications where responsiveness, clarity, and maintainability are essential.
+              </p>
+              <p class="hero-text">
+                The purpose of Framm is to simplify the process of building modern user interfaces without sacrificing performance or introducing unnecessary complexity. It is a system that aims to provide the best parts of immediate-mode tooling and structured UI frameworks, while avoiding the weaknesses of both. Every design decision is made with the goal of improving developer workflow and reducing friction.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#problem">Explore the Engine</a>
+                <a class="btn btn-secondary" href="https://github.com/GitAvaneesh/framm" target="_blank">View on GitHub ↗</a>
+              </div>
+
+              <div class="hero-stats">
+                <div class="stat">
+                  <strong>1.9ms</strong>
+                  <span>Render latency</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                  <strong>99.8%</strong>
+                  <span>Frame stability</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                  <strong>4.1MB</strong>
+                  <span>Runtime footprint</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-panel reveal reveal-delay" aria-hidden="true">
+              <div class="panel-shell">
+                <div class="panel-header">
+                  <div class="panel-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                  </div>
+                  <span class="panel-title">Editor · Frame</span>
+                  <span class="status-chip">Active development</span>
+                </div>
+                <div class="panel-sidebar">
+                  <div class="sidebar-item active">
+                    <span class="sb-icon">⬡</span>
+                    <span>Layout</span>
+                  </div>
+                  <div class="sidebar-item">
+                    <span class="sb-icon">◈</span>
+                    <span>Components</span>
+                  </div>
+                  <div class="sidebar-item">
+                    <span class="sb-icon">◎</span>
+                    <span>Styling</span>
+                  </div>
+                  <div class="sidebar-item">
+                    <span class="sb-icon">⬡</span>
+                    <span>Render</span>
+                  </div>
+                  <div class="sidebar-item">
+                    <span class="sb-icon">◈</span>
+                    <span>Events</span>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <div class="panel-grid">
+                    <div class="panel-card pc-tall">
+                      <div class="pc-label">Scene Graph</div>
+                      <div class="pc-lines">
+                        <div class="pc-line" style="width:70%"></div>
+                        <div class="pc-line" style="width:50%"></div>
+                        <div class="pc-line" style="width:85%"></div>
+                        <div class="pc-line" style="width:40%"></div>
+                      </div>
+                    </div>
+                    <div class="panel-card">
+                      <div class="pc-label">Metrics</div>
+                      <div class="pc-metric">1.9<small>ms</small></div>
+                    </div>
+                  </div>
+                  <div class="panel-row">
+                    <div class="panel-tile">
+                      <div class="pt-bar" style="--w:88%"></div>
+                      <span>Render</span>
+                    </div>
+                    <div class="panel-tile">
+                      <div class="pt-bar" style="--w:72%"></div>
+                      <span>Layout</span>
+                    </div>
+                    <div class="panel-tile">
+                      <div class="pt-bar" style="--w:55%"></div>
+                      <span>Style</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="scroll-hint">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow">↓</div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════ MARQUEE ═══════════════════════ -->
+        <div class="marquee-section">
+          <div class="marquee-track">
+            <div class="marquee-content">
+              <span>High Performance</span><span class="sep">·</span>
+              <span>Native C++</span><span class="sep">·</span>
+              <span>Immediate Mode</span><span class="sep">·</span>
+              <span>Structured Layout</span><span class="sep">·</span>
+              <span>GPU Efficient</span><span class="sep">·</span>
+              <span>Developer First</span><span class="sep">·</span>
+              <span>Modular Architecture</span><span class="sep">·</span>
+              <span>Minimal Footprint</span><span class="sep">·</span>
+              <span>High Performance</span><span class="sep">·</span>
+              <span>Native C++</span><span class="sep">·</span>
+              <span>Immediate Mode</span><span class="sep">·</span>
+              <span>Structured Layout</span><span class="sep">·</span>
+              <span>GPU Efficient</span><span class="sep">·</span>
+              <span>Developer First</span><span class="sep">·</span>
+              <span>Modular Architecture</span><span class="sep">·</span>
+              <span>Minimal Footprint</span><span class="sep">·</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════ PROBLEM ═══════════════════════ -->
+        <section class="section section-split" id="problem">
+          <div class="section-tag reveal">
+            <span>01</span>
+            <span>Problem</span>
+          </div>
+          <div class="section-header reveal">
+            <p class="eyebrow">What is broken today?</p>
+            <h2>UI development is fragmented between fast but shallow tools and powerful but heavy frameworks.</h2>
+          </div>
+
+          <div class="split-layout reveal">
+            <div class="split-text">
+              <p class="section-text">
+                Many existing UI solutions fall into two categories: immediate-mode libraries that are simple, fast, and easy to integrate, and comprehensive frameworks that include full-featured layout systems and styling engines. Immediate-mode tools are beloved for their ability to render interfaces quickly and support rapid iteration, but they often lack the structural depth required for large-scale applications.
+              </p>
+              <p class="section-text">
+                Developers frequently find themselves layering additional abstractions just to achieve consistent spacing, reusable layouts, or predictable interface behavior. These compensations accumulate into technical debt that undermines the very simplicity that made the tool appealing in the first place.
+              </p>
+              <p class="section-text">
+                On the other side, comprehensive frameworks deliver a lot of capability, but they also introduce significant overhead in complexity, build size, and architectural constraints. These frameworks can become rigid, verbose, and difficult to optimize, which undermines the responsiveness that many native tools require.
+              </p>
+              <p class="section-text">
+                The net effect is a fragmented ecosystem where developers are forced to choose between speed and structure, simplicity and capability. There is no middle path that honors both without compromise. Framm exists to fill that gap.
+              </p>
+            </div>
+            <div class="split-visual">
+              <div class="comparison-card">
+                <div class="comparison-item ci-bad">
+                  <div class="ci-header">
+                    <span class="ci-label">Immediate-mode libs</span>
+                    <span class="ci-badge ci-badge-warn">Shallow</span>
+                  </div>
+                  <ul class="ci-list">
+                    <li><span class="check check-yes">✓</span> Fast to integrate</li>
+                    <li><span class="check check-yes">✓</span> Low overhead</li>
+                    <li><span class="check check-no">✗</span> No structured layout</li>
+                    <li><span class="check check-no">✗</span> Poor scalability</li>
+                    <li><span class="check check-no">✗</span> Limited styling</li>
+                  </ul>
+                </div>
+                <div class="comparison-item ci-bad">
+                  <div class="ci-header">
+                    <span class="ci-label">Heavy frameworks</span>
+                    <span class="ci-badge ci-badge-warn">Constrained</span>
+                  </div>
+                  <ul class="ci-list">
+                    <li><span class="check check-yes">✓</span> Full feature set</li>
+                    <li><span class="check check-yes">✓</span> Rich layout system</li>
+                    <li><span class="check check-no">✗</span> Large build size</li>
+                    <li><span class="check check-no">✗</span> Performance overhead</li>
+                    <li><span class="check check-no">✗</span> Rigid architecture</li>
+                  </ul>
+                </div>
+                <div class="comparison-item ci-good">
+                  <div class="ci-header">
+                    <span class="ci-label">Framm</span>
+                    <span class="ci-badge ci-badge-good">Balanced</span>
+                  </div>
+                  <ul class="ci-list">
+                    <li><span class="check check-yes">✓</span> Intuitive API</li>
+                    <li><span class="check check-yes">✓</span> Structured layout</li>
+                    <li><span class="check check-yes">✓</span> Minimal footprint</li>
+                    <li><span class="check check-yes">✓</span> GPU efficiency</li>
+                    <li><span class="check check-yes">✓</span> Modular architecture</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════ APPROACH ═══════════════════════ -->
+        <section class="section" id="approach">
+          <div class="section-tag reveal">
+            <span>02</span>
+            <span>Approach</span>
+          </div>
+          <div class="section-header reveal">
+            <p class="eyebrow">How Framm solves it</p>
+            <h2>Combining immediacy with structure to deliver a better foundation for native software.</h2>
+          </div>
+
+          <div class="approach-grid reveal">
+            <div class="approach-text">
+              <p class="section-text">
+                Framm is designed to address the gap between lightweight UI libraries and heavyweight frameworks. It provides an interface that feels immediate and intuitive, while maintaining a structured layout and rendering system underneath. This hybrid approach allows developers to write clean, concise code without losing the ability to build complex, adaptive interfaces that scale with the application.
+              </p>
+              <p class="section-text">
+                The engine is not intended to replicate existing tools. Instead, it aims to redefine the balance between usability and capability by offering a consistent, developer-friendly surface on top of a carefully engineered architecture.
+              </p>
+              <p class="section-text">
+                Framm is built to make modern UI development feel natural, while also preserving the performance and transparency required for professional native software. The goal is not to abstract away complexity but to provide the right primitives so complexity never becomes overwhelming.
+              </p>
+            </div>
+
+            <div class="approach-steps">
+              <div class="step-card reveal">
+                <div class="step-num">01</div>
+                <div class="step-body">
+                  <h3>Immediate-mode surface</h3>
+                  <p>Developers interact with Framm through an API that feels direct and low-ceremony, enabling rapid prototyping and tight iteration loops without boilerplate.</p>
+                </div>
+              </div>
+              <div class="step-card reveal">
+                <div class="step-num">02</div>
+                <div class="step-body">
+                  <h3>Structured internal layout</h3>
+                  <p>Beneath the surface, a full layout engine handles measurement, constraint resolution, and adaptive sizing — giving you the power of a full framework without its verbosity.</p>
+                </div>
+              </div>
+              <div class="step-card reveal">
+                <div class="step-num">03</div>
+                <div class="step-body">
+                  <h3>Optimized render pipeline</h3>
+                  <p>A batched, GPU-aware renderer processes all UI elements as a unified scene, minimizing draw calls and maximizing frame rate stability across complex layouts.</p>
+                </div>
+              </div>
+              <div class="step-card reveal">
+                <div class="step-num">04</div>
+                <div class="step-body">
+                  <h3>Modular, composable design</h3>
+                  <p>Every subsystem is independently evolvable. Adopt only what you need, extend what you want, and build plugins without touching the core runtime.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════ PERFORMANCE ═══════════════════════ -->
+        <section class="section section-dark" id="performance">
+          <div class="section-tag reveal">
+            <span>03</span>
+            <span>Performance</span>
+          </div>
+          <div class="section-header reveal">
+            <p class="eyebrow">Built for speed</p>
+            <h2>Every part of Framm is engineered with efficiency as a first-class concern.</h2>
+          </div>
+
+          <div class="perf-layout reveal">
+            <div class="perf-text">
+              <p class="section-text">
+                Framm's foundation is rooted in modern C++ practices that emphasize memory control, minimal overhead, and consistent frame rates. The engine is designed to minimize allocations, reduce unnecessary work, and keep render pipelines efficient. Developers can focus on building interfaces without needing to make low-level performance trade-offs in their application code.
+              </p>
+              <p class="section-text">
+                Rendering is handled through an optimized pipeline that focuses on batching and minimizing draw calls. By treating UI elements as part of a cohesive scene rather than isolated components, Framm maximizes GPU efficiency and avoids the common bottlenecks that slow down complex layouts.
+              </p>
+              <p class="section-text">
+                Memory management follows a pool-based allocation strategy designed for predictable performance. Rather than relying on general-purpose heap allocations that can fragment over time, Framm uses dedicated pools for UI nodes, layout data, and render primitives. This keeps cache locality high and allocation overhead minimal, even in interfaces that update every frame.
+              </p>
+            </div>
+
+            <div class="perf-metrics">
+              <div class="metric-block reveal">
+                <div class="metric-top">
+                  <span class="metric-label">Render latency</span>
+                  <strong class="metric-value">1.9ms</strong>
+                </div>
+                <div class="metric-bar">
+                  <div class="metric-fill" style="--pct: 92%"></div>
+                </div>
+                <p class="metric-note">Average across complex scene with 800+ UI nodes</p>
+              </div>
+              <div class="metric-block reveal">
+                <div class="metric-top">
+                  <span class="metric-label">Frame stability</span>
+                  <strong class="metric-value">99.8%</strong>
+                </div>
+                <div class="metric-bar">
+                  <div class="metric-fill" style="--pct: 99.8%"></div>
+                </div>
+                <p class="metric-note">Consistent throughput at 60fps under sustained load</p>
+              </div>
+              <div class="metric-block reveal">
+                <div class="metric-top">
+                  <span class="metric-label">Runtime footprint</span>
+                  <strong class="metric-value">4.1MB</strong>
+                </div>
+                <div class="metric-bar">
+                  <div class="metric-fill" style="--pct: 42%"></div>
+                </div>
+                <p class="metric-note">Stripped release binary including renderer and layout engine</p>
+              </div>
+              <div class="metric-block reveal">
+                <div class="metric-top">
+                  <span class="metric-label">Draw call reduction</span>
+                  <strong class="metric-value">~68%</strong>
+                </div>
+                <div class="metric-bar">
+                  <div class="metric-fill" style="--pct: 68%"></div>
+                </div>
+                <p class="metric-note">Compared to naive per-element draw approaches</p>
+              </div>
+              <div class="metric-block reveal">
+                <div class="metric-top">
+                  <span class="metric-label">Cold startup time</span>
+                  <strong class="metric-value">12ms</strong>
+                </div>
+                <div class="metric-bar">
+                  <div class="metric-fill" style="--pct: 88%"></div>
+                </div>
+                <p class="metric-note">From engine init to first rendered frame</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="perf-cards reveal">
+            <div class="perf-card">
+              <div class="pc-icon">⬡</div>
+              <h3>Memory pools</h3>
+              <p>Pool-based allocators keep heap fragmentation low and cache efficiency high. UI nodes, primitives, and layout data live in dedicated, reusable memory regions.</p>
+            </div>
+            <div class="perf-card">
+              <div class="pc-icon">◎</div>
+              <h3>Batch renderer</h3>
+              <p>UI elements are collected into batches by material and depth before submission to the GPU. This eliminates redundant state changes and maximizes fill rate utilization.</p>
+            </div>
+            <div class="perf-card">
+              <div class="pc-icon">◈</div>
+              <h3>Dirty tracking</h3>
+              <p>Only changed regions of the scene graph are re-evaluated. Static sub-trees are cached and skipped during both layout and render passes, saving significant CPU time.</p>
+            </div>
+            <div class="perf-card">
+              <div class="pc-icon">▲</div>
+              <h3>Zero-cost layout</h3>
+              <p>The layout engine operates in a single forward pass for most cases. Complex constraint graphs are resolved incrementally, never blocking the render thread.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════ ARCHITECTURE ═══════════════════════ -->
+        <section class="section" id="architecture">
+          <div class="section-tag reveal">
+            <span>04</span>
+            <span>Architecture</span>
+          </div>
+          <div class="section-header reveal">
+            <p class="eyebrow">System design</p>
+            <h2>A layered, modular engine built to evolve without breaking what works.</h2>
+          </div>
+
+          <div class="arch-layout reveal">
+            <div class="arch-diagram">
+              <div class="arch-layer al-top">
+                <span class="al-label">Application Layer</span>
+                <div class="al-modules">
+                  <div class="al-mod">Your App</div>
+                  <div class="al-mod">Plugin System</div>
+                </div>
+              </div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-layer al-mid">
+                <span class="al-label">Framm API</span>
+                <div class="al-modules">
+                  <div class="al-mod">Layout Engine</div>
+                  <div class="al-mod">Style System</div>
+                  <div class="al-mod">Event Manager</div>
+                  <div class="al-mod">Component API</div>
+                </div>
+              </div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-layer al-low">
+                <span class="al-label">Runtime Core</span>
+                <div class="al-modules">
+                  <div class="al-mod">Scene Graph</div>
+                  <div class="al-mod">Memory Pools</div>
+                  <div class="al-mod">Dirty Tracker</div>
+                </div>
+              </div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-layer al-bottom">
+                <span class="al-label">Render Backend</span>
+                <div class="al-modules">
+                  <div class="al-mod">Batch Renderer</div>
+                  <div class="al-mod">GPU Commands</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="arch-text">
+              <p class="section-text">
+                Framm is organized into four distinct layers, each with a clearly defined responsibility. This separation ensures that changes to one layer do not cascade unpredictably into others, making the engine easier to reason about, test, and extend over time.
+              </p>
+              <p class="section-text">
+                The application layer is where your code lives. It communicates with Framm exclusively through the public API, which provides layout, styling, event handling, and component management. This layer is intentionally decoupled from internal details, so your code remains stable as the engine evolves.
+              </p>
+              <p class="section-text">
+                The runtime core manages the scene graph, memory allocation, and change detection. It is the most performance-critical part of the system. The render backend sits below the core and is deliberately swappable — enabling support for different graphics APIs or custom rendering pipelines without touching anything above.
+              </p>
+
+              <div class="arch-pillars">
+                <div class="arch-pillar">
+                  <strong>Separation of concerns</strong>
+                  <p>Each subsystem owns its domain. No layer reaches across its boundary into another's internals.</p>
+                </div>
+                <div class="arch-pillar">
+                  <strong>Swappable backends</strong>
+                  <p>The rendering layer is an abstraction. Future backends for Vulkan, Metal, or WebGPU can be added without rewriting layout or style logic.</p>
+                </div>
+                <div class="arch-pillar">
+                  <strong>Incremental adoption</strong>
+                  <p>You can use the layout engine without the style system, or the style system without the component API. Take what you need.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════ LAYOUT ═══════════════════════ -->
+        <section class="section section-dark" id="system">
+          <div class="section-tag reveal">
+            <span>05</span>
+            <span>Layout</span>
+          </div>
+          <div class="section-header reveal">
+            <p class="eyebrow">Layout and styling</p>
+            <h2>Structured layout with a lightweight, expressive styling system.</h2>
+          </div>
+
+          <div class="layout-grid reveal">
+            <div class="layout-text">
+              <p class="section-text">
+                Framm introduces a layout system that remains intuitive while providing greater flexibility than simple stacking models. The system is designed to adapt cleanly to changing content and screen sizes, enabling developers to build interfaces that feel stable and predictable without manual positioning or constant recalculation.
+              </p>
+              <p class="section-text">
+                Styling is handled through a consistent, minimal system that supports color schemes, spacing, typography, and component-level customization. It avoids the excess of larger theme engines by offering just enough structure to achieve polished visuals while staying lightweight and easy to reason about.
+              </p>
+              <p class="section-text">
+                The layout engine performs a single-pass measurement and placement cycle for most interface configurations. Complex adaptive layouts use a constraint-resolution step that is isolated from the frame render, ensuring that even deeply nested structures do not introduce frame time spikes.
+              </p>
+            </div>
+
+            <div class="layout-demo">
+              <div class="ld-shell">
+                <div class="ld-header">
+                  <div class="ld-dots"><span></span><span></span><span></span></div>
+                  <span>Layout preview</span>
+                </div>
+                <div class="ld-body">
+                  <div class="ld-col">
+                    <div class="ld-block ld-full">Column root</div>
+                    <div class="ld-row">
+                      <div class="ld-block ld-half">Row A</div>
+                      <div class="ld-block ld-half">Row B</div>
+                    </div>
+                    <div class="ld-row">
+                      <div class="ld-block ld-third">Grid 1</div>
+                      <div class="ld-block ld-third">Grid 2</div>
+                      <div class="ld-block ld-third">Grid 3</div>
+                    </div>
+                    <div class="ld-block ld-full ld-tall">Flex container</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="style-features reveal">
+            <div class="sf-item">
+              <h3>Color system</h3>
+              <p>Define semantic tokens for foreground, background, border, and accent colors. Apply consistently across components through a single style object.</p>
+            </div>
+            <div class="sf-item">
+              <h3>Spacing scale</h3>
+              <p>A configurable spacing scale drives all margins, paddings, and gaps. Consistent density emerges automatically without per-component overrides.</p>
+            </div>
+            <div class="sf-item">
+              <h3>Typography</h3>
+              <p>Font families, sizes, weights, and line heights are declared once at the engine level and applied through named text styles across the interface.</p>
+            </div>
+            <div class="sf-item">
+              <h3>Component tokens</h3>
+              <p>Individual components can override global tokens for scoped customization, without polluting the shared style context.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════ DEVELOPER EXPERIENCE ═══════════════════════ -->
+        <section class="section" id="experience">
+          <div class="section-tag reveal">
+            <span>06</span>
+            <span>DX</span>
+          </div>
+          <div class="section-header reveal">
+            <p class="eyebrow">Developer experience</p>
+            <h2>Clean APIs, clear structure, and a focused architecture you can grow with.</h2>
+          </div>
+
+          <div class="dx-grid reveal">
+            <div class="dx-item">
+              <div class="dx-icon">◉</div>
+              <h3>Expressive API</h3>
+              <p>The API is designed to describe interfaces in a natural way. Method chains read like a layout specification, not a sequence of imperative commands.</p>
+            </div>
+            <div class="dx-item">
+              <div class="dx-icon">⬡</div>
+              <h3>Composable components</h3>
+              <p>Layouts are built from composable primitives — Column, Row, Stack, and Grid — that can be nested and extended without hitting abstraction ceilings.</p>
+            </div>
+            <div class="dx-item">
+              <div class="dx-icon">◈</div>
+              <h3>Predictable behavior</h3>
+              <p>Consistent, well-documented behavior at every layer reduces surprise. The same layout rules apply whether you are building a simple panel or a complex editor.</p>
+            </div>
+            <div class="dx-item">
+              <div class="dx-icon">▲</div>
+              <h3>Incremental adoption</h3>
+              <p>Framm's modular design lets teams introduce the engine gradually into an existing native application rather than requiring a full rewrite from the start.</p>
+            </div>
+            <div class="dx-item">
+              <div class="dx-icon">◎</div>
+              <h3>Plugin system</h3>
+              <p>Extend Framm's capabilities through a structured plugin interface. Custom components, renderers, and layout algorithms can be integrated without forking the core.</p>
+            </div>
+            <div class="dx-item">
+              <div class="dx-icon">⬡</div>
+              <h3>Low cognitive load</h3>
+              <p>By keeping the API surface focused and the architecture transparent, Framm reduces the mental overhead required to build and maintain complex native interfaces.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════ USE CASES ═══════════════════════ -->
+        <section class="section section-dark" id="usecases">
+          <div class="section-tag reveal">
+            <span>07</span>
+            <span>Use Cases</span>
+          </div>
+          <div class="section-header reveal">
+            <p class="eyebrow">Where Framm excels</p>
+            <h2>Purpose-built for scenarios where performance and clarity both matter.</h2>
+          </div>
+
+          <div class="use-grid reveal">
+            <div class="use-card use-featured">
+              <div class="use-icon">⬡</div>
+              <h3>Developer tools</h3>
+              <p>Profilers, debuggers, inspectors, and editors benefit from Framm's combination of low latency rendering, structured layout, and straightforward composability. Build internal tooling that feels as polished as the products it supports.</p>
+            </div>
+            <div class="use-card">
+              <div class="use-icon">◎</div>
+              <h3>Real-time overlays</h3>
+              <p>Frame rate counters, diagnostic overlays, and in-engine editors require consistent sub-millisecond rendering. Framm's batch pipeline handles these without stealing time from your main application.</p>
+            </div>
+            <div class="use-card">
+              <div class="use-icon">◈</div>
+              <h3>Control panels</h3>
+              <p>Industrial, scientific, and engineering control surfaces that demand dense, precise layouts with no visual artifacts. Framm's layout engine handles complex constraint relationships with predictable output.</p>
+            </div>
+            <div class="use-card">
+              <div class="use-icon">▲</div>
+              <h3>Desktop applications</h3>
+              <p>Native desktop software that needs a modern interface without the bloat of cross-platform web technology stacks. Framm provides a genuinely native foundation at a fraction of the runtime cost.</p>
+            </div>
+            <div class="use-card">
+              <div class="use-icon">⬡</div>
+              <h3>Game editors</h3>
+              <p>Scene editors, asset pipelines, and world builders running in-process alongside game engines. Framm's immediate-feel API integrates cleanly into existing native render loops.</p>
+            </div>
+            <div class="use-card">
+              <div class="use-icon">◎</div>
+              <h3>Embedded interfaces</h3>
+              <p>Resource-constrained environments where memory footprint and startup time matter. The 4.1MB runtime and pool-based allocator make Framm viable in scenarios where heavier toolkits are simply not an option.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════ CODE ═══════════════════════ -->
+        <section class="section" id="code">
+          <div class="section-tag reveal">
+            <span>08</span>
+            <span>Code</span>
+          </div>
+          <div class="section-header reveal">
+            <p class="eyebrow">Code preview</p>
+            <h2>Framm is expressive, concise, and easy to reason about.</h2>
+            <p class="section-text">
+              The examples below demonstrate how native UIs can be declared with a clean, composable API that stays readable even as interfaces grow in complexity. Framm code reads like a layout description, not a sequence of imperative commands.
+            </p>
+          </div>
+
+          <div class="code-tabs reveal" id="codeTabs">
+            <div class="tab-nav">
+              <button class="tab-btn active" data-tab="basic">Basic window</button>
+              <button class="tab-btn" data-tab="complex">Dashboard layout</button>
+              <button class="tab-btn" data-tab="style">Styling</button>
+              <button class="tab-btn" data-tab="events">Event handling</button>
+            </div>
+
+            <div class="tab-content active" data-content="basic">
+              <pre class="code-block"><code><span class="kw">#include</span> <span class="str">&lt;framm/core.h&gt;</span>
+
+<span class="kw">using namespace</span> framm;
+
+<span class="kw">int</span> main() {
+  <span class="kw">auto</span> app = Application::Create(<span class="str">"Studio"</span>);
+  <span class="kw">auto</span> window = app.CreateWindow({<span class="str">"Framm"</span>, <span class="num">1280</span>, <span class="num">780</span>});
+
+  window->Layout(
+    Column()
+      .Spacing(<span class="num">16</span>)
+      .Add(Text(<span class="str">"Dashboard"</span>))
+      .Add(Row()
+        .Add(Button(<span class="str">"Build"</span>))
+        .Add(Button(<span class="str">"Inspect"</span>)))
+  );
+
+  <span class="kw">return</span> app.Run();
+}</code></pre>
+            </div>
+
+            <div class="tab-content" data-content="complex">
+              <pre class="code-block"><code><span class="kw">#include</span> <span class="str">&lt;framm/core.h&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;framm/widgets.h&gt;</span>
+
+<span class="kw">using namespace</span> framm;
+
+<span class="kw">auto</span> BuildDashboard() {
+  <span class="kw">return</span>
+    Column()
+      .Fill()
+      .Spacing(<span class="num">0</span>)
+      .Add(Topbar()
+        .Add(Label(<span class="str">"Framm Studio"</span>).Bold())
+        .Add(Spacer())
+        .Add(Badge(<span class="str">"v0.4.2"</span>)))
+      .Add(Row()
+        .Fill()
+        .Add(Sidebar()
+          .Width(<span class="num">240</span>)
+          .Add(NavItem(<span class="str">"Inspector"</span>))
+          .Add(NavItem(<span class="str">"Scene"</span>))
+          .Add(NavItem(<span class="str">"Settings"</span>)))
+        .Add(ContentArea()
+          .Padding(<span class="num">24</span>)
+          .Add(MetricGrid()
+            .Add(MetricCard(<span class="str">"Latency"</span>, <span class="str">"1.9ms"</span>))
+            .Add(MetricCard(<span class="str">"Stability"</span>, <span class="str">"99.8%"</span>))
+            .Add(MetricCard(<span class="str">"Footprint"</span>, <span class="str">"4.1MB"</span>)))));
+}
+
+<span class="kw">int</span> main() {
+  <span class="kw">auto</span> app = Application::Create(<span class="str">"Studio"</span>);
+  <span class="kw">auto</span> window = app.CreateWindow({<span class="str">"Dashboard"</span>, <span class="num">1440</span>, <span class="num">900</span>});
+  window->Layout(BuildDashboard());
+  <span class="kw">return</span> app.Run();
+}</code></pre>
+            </div>
+
+            <div class="tab-content" data-content="style">
+              <pre class="code-block"><code><span class="kw">#include</span> <span class="str">&lt;framm/style.h&gt;</span>
+
+<span class="kw">using namespace</span> framm;
+
+<span class="kw">auto</span> theme = StyleSheet{
+  .colors = {
+    .background = Color::Hex(<span class="str">"#0d0d0d"</span>),
+    .surface    = Color::Hex(<span class="str">"#161616"</span>),
+    .accent     = Color::Hex(<span class="str">"#c8ff00"</span>),
+    .text       = Color::Hex(<span class="str">"#e8e8e8"</span>),
+    .muted      = Color::Hex(<span class="str">"#555"</span>),
+  },
+  .spacing = SpacingScale::Custom({ <span class="num">4</span>, <span class="num">8</span>, <span class="num">12</span>, <span class="num">16</span>, <span class="num">24</span>, <span class="num">32</span>, <span class="num">48</span> }),
+  .radius  = <span class="num">6.0f</span>,
+  .font    = Font::Load(<span class="str">"JetBrainsMono"</span>, <span class="num">14</span>),
+};
+
+<span class="kw">int</span> main() {
+  <span class="kw">auto</span> app = Application::Create(<span class="str">"Styled App"</span>);
+  app.SetStyleSheet(theme);
+  <span class="kw">auto</span> w = app.CreateWindow({<span class="str">"Framm"</span>, <span class="num">1280</span>, <span class="num">780</span>});
+  w->Layout(Column().Add(Text(<span class="str">"Styled interface"</span>)));
+  <span class="kw">return</span> app.Run();
+}</code></pre>
+            </div>
+
+            <div class="tab-content" data-content="events">
+              <pre class="code-block"><code><span class="kw">#include</span> <span class="str">&lt;framm/core.h&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;framm/events.h&gt;</span>
+
+<span class="kw">using namespace</span> framm;
+
+<span class="kw">int</span> main() {
+  <span class="kw">auto</span> app = Application::Create(<span class="str">"Events Demo"</span>);
+  <span class="kw">auto</span> w   = app.CreateWindow({<span class="str">"Framm"</span>, <span class="num">1280</span>, <span class="num">780</span>});
+
+  <span class="kw">int</span> count = <span class="num">0</span>;
+
+  w->Layout(
+    Column()
+      .Spacing(<span class="num">16</span>)
+      .Add(
+        Button(<span class="str">"Click me"</span>)
+          .OnClick([&amp;]() {
+            count++;
+            <span class="kw">return</span> UpdateState([&amp;](Layout&amp; l) {
+              l.Find(<span class="str">"counter"</span>).SetText(
+                <span class="str">"Count: "</span> + std::to_string(count));
+            });
+          }))
+      .Add(Text(<span class="str">"Count: 0"</span>).Id(<span class="str">"counter"</span>))
+  );
+
+  <span class="kw">return</span> app.Run();
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════ SHOWCASE ═══════════════════════ -->
+        <section class="section section-dark" id="showcase">
+          <div class="section-tag reveal">
+            <span>09</span>
+            <span>Showcase</span>
+          </div>
+          <div class="section-header reveal">
+            <p class="eyebrow">Interface showcase</p>
+            <h2>What Framm-powered interfaces look like in practice.</h2>
+            <p class="section-text">Framm's visual language communicates restraint, precision, and structured depth. No excess. No noise. Interfaces that hold up under inspection.</p>
+          </div>
+
+          <div class="showcase-grid reveal">
+            <div class="profile-card">
+              <div class="profile-head">
+                <span>Inspector</span>
+                <span class="status-chip">Live</span>
+              </div>
+              <div class="profile-body">
+                <div class="prop-row"><span class="prop-key">width</span><span class="prop-val">480px</span></div>
+                <div class="prop-row"><span class="prop-key">height</span><span class="prop-val">auto</span></div>
+                <div class="prop-row"><span class="prop-key">padding</span><span class="prop-val">16px 24px</span></div>
+                <div class="prop-row"><span class="prop-key">gap</span><span class="prop-val">12px</span></div>
+                <div class="prop-row"><span class="prop-key">color</span><span class="prop-val prop-color"><span class="color-dot" style="background:#c8ff00"></span>#c8ff00</span></div>
+              </div>
+            </div>
+
+            <div class="profile-card profile-card-wide">
+              <div class="profile-head">
+                <span>Dashboard</span>
+                <span class="status-chip chip-stable">Stable</span>
+              </div>
+              <div class="profile-grid">
+                <div class="metric-card">
+                  <span>Latency</span>
+                  <strong>1.9ms</strong>
+                  <div class="mc-bar"><div style="width:88%"></div></div>
+                </div>
+                <div class="metric-card">
+                  <span>Draw calls</span>
+                  <strong>122</strong>
+                  <div class="mc-bar"><div style="width:61%"></div></div>
+                </div>
+                <div class="metric-card">
+                  <span>Nodes</span>
+                  <strong>847</strong>
+                  <div class="mc-bar"><div style="width:74%"></div></div>
+                </div>
+                <div class="metric-card">
+                  <span>FPS</span>
+                  <strong>60.0</strong>
+                  <div class="mc-bar"><div style="width:100%"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-card">
+              <div class="profile-head">
+                <span>Control panel</span>
+                <span class="status-chip chip-preview">Preview</span>
+              </div>
+              <div class="profile-body">
+                <div class="cp-toggle-row">
+                  <span>Vsync</span>
+                  <div class="cp-toggle active"></div>
+                </div>
+                <div class="cp-toggle-row">
+                  <span>Dirty tracking</span>
+                  <div class="cp-toggle active"></div>
+                </div>
+                <div class="cp-toggle-row">
+                  <span>Batch renderer</span>
+                  <div class="cp-toggle active"></div>
+                </div>
+                <div class="cp-toggle-row">
+                  <span>Debug overlay</span>
+                  <div class="cp-toggle"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-card profile-card-wide">
+              <div class="profile-head">
+                <span>Scene graph</span>
+                <span class="status-chip">Active</span>
+              </div>
+              <div class="scene-tree">
+                <div class="tree-node tn-root">▼ Application</div>
+                <div class="tree-node tn-1">▼ Window</div>
+                <div class="tree-node tn-2">▼ Column</div>
+                <div class="tree-node tn-3">  ▼ Topbar</div>
+                <div class="tree-node tn-4">    Text "Dashboard"</div>
+                <div class="tree-node tn-4">    Badge "v0.4"</div>
+                <div class="tree-node tn-3">  ▼ Row</div>
+                <div class="tree-node tn-4">    Sidebar</div>
+                <div class="tree-node tn-4 tn-active">    ContentArea ●</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════ ROADMAP ═══════════════════════ -->
+        <section class="section" id="roadmap">
+          <div class="section-tag reveal">
+            <span>10</span>
+            <span>Roadmap</span>
+          </div>
+          <div class="section-header reveal">
+            <p class="eyebrow">Development roadmap</p>
+            <h2>Where Framm is headed and what is being built right now.</h2>
+          </div>
+
+          <div class="roadmap-timeline reveal">
+            <div class="rm-item rm-done">
+              <div class="rm-marker"></div>
+              <div class="rm-content">
+                <div class="rm-phase">Alpha · Complete</div>
+                <h3>Core runtime and layout engine</h3>
+                <p>Scene graph, memory pool system, basic layout primitives (Column, Row, Stack), and the initial render pipeline. Internal testing and API stabilization.</p>
+              </div>
+            </div>
+            <div class="rm-item rm-active">
+              <div class="rm-marker rm-marker-active"></div>
+              <div class="rm-content">
+                <div class="rm-phase">Beta · In progress</div>
+                <h3>Style system and component library</h3>
+                <p>Color tokens, spacing scale, typography, and a set of production-ready widgets including Button, Text, Panel, Grid, and Topbar. Public API surface lock.</p>
+              </div>
+            </div>
+            <div class="rm-item">
+              <div class="rm-marker rm-marker-future"></div>
+              <div class="rm-content">
+                <div class="rm-phase">v1.0 · Planned</div>
+                <h3>Plugin system and documentation</h3>
+                <p>Structured plugin interface for custom components and renderers. Full API documentation, quick-start guides, and integration examples for common native use cases.</p>
+              </div>
+            </div>
+            <div class="rm-item">
+              <div class="rm-marker rm-marker-future"></div>
+              <div class="rm-content">
+                <div class="rm-phase">v1.x · Future</div>
+                <h3>Additional render backends</h3>
+                <p>Vulkan and Metal backends for platform-specific optimization. Experimental WebGPU target for cross-environment deployment. Community plugin registry.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════ PHILOSOPHY ═══════════════════════ -->
+        <section class="section section-dark" id="philosophy">
+          <div class="section-tag reveal">
+            <span>11</span>
+            <span>Philosophy</span>
+          </div>
+
+          <div class="philosophy-grid reveal">
+            <div class="phil-text">
+              <p class="eyebrow">Philosophy</p>
+              <h2>A deliberate engine for real software work.</h2>
+              <p class="section-text">
+                Framm is guided by the belief that software tools should empower developers rather than constrain them. The engine is built around a clear set of principles: flexibility without losing structure, performance without sacrificing readability, and extensibility without adding unnecessary complexity.
+              </p>
+              <p class="section-text">
+                Every design decision within Framm is made with the goal of improving the developer's workflow and reducing friction during development. The engine does not try to do everything. Instead, it tries to do the right things exceptionally well, and provide clean seams where you can take over.
+              </p>
+              <p class="section-text">
+                The long-term vision is to become a reliable and widely adopted foundation for both small and large native projects. That means prioritizing stability, consistency, and continuous improvement, while staying responsive to real-world developer needs and avoiding the accumulation of legacy complexity.
+              </p>
+            </div>
+
+            <div class="principles-card">
+              <div class="pillar">
+                <div class="pillar-num">I</div>
+                <div class="pillar-body">
+                  <strong>Clarity first</strong>
+                  <p>Clear APIs and predictable layout behavior reduce cognitive load and improve maintainability. Surprise is a failure mode, not a feature.</p>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num">II</div>
+                <div class="pillar-body">
+                  <strong>Performance always</strong>
+                  <p>Optimized rendering and disciplined memory usage keep interfaces smooth under load. Performance is not an afterthought — it is the foundation.</p>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num">III</div>
+                <div class="pillar-body">
+                  <strong>Engineered for growth</strong>
+                  <p>A modular architecture makes it easier to extend Framm without disrupting the core system. New capability should not cost existing stability.</p>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num">IV</div>
+                <div class="pillar-body">
+                  <strong>Developer respect</strong>
+                  <p>Framm assumes competence. It provides primitives and honest abstractions rather than opinionated magic that hides the system from you.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════ CTA ═══════════════════════ -->
+        <section class="section cta-section" id="cta">
+          <div class="cta-inner reveal">
+            <div class="cta-eyebrow">
+              <span class="dot-live"></span>
+              <span>Active development</span>
+            </div>
+            <h2>Framm is being built for developers who demand the best from their tools.</h2>
+            <p>Follow progress on GitHub, star the repository to stay informed, or open an issue to share your use case. The engine is shaped by real-world developer needs.</p>
+            <div class="cta-actions">
+              <a class="btn btn-primary" href="https://github.com/GitAvaneesh/framm" target="_blank">View on GitHub ↗</a>
+              <a class="btn btn-ghost" href="#overview">Back to top</a>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+      <footer class="footer" id="github">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <span class="brand-icon">▲</span>
+            <span class="footer-name">Framm</span>
+            <p class="footer-tagline">A modern, performance-oriented UI engine for C++. Currently in active development.</p>
+          </div>
+
+          <div class="footer-cols">
+            <div class="footer-col">
+              <strong>Engine</strong>
+              <a href="#problem">Problem</a>
+              <a href="#approach">Approach</a>
+              <a href="#performance">Performance</a>
+              <a href="#architecture">Architecture</a>
+            </div>
+            <div class="footer-col">
+              <strong>Design</strong>
+              <a href="#system">Layout</a>
+              <a href="#experience">Developer experience</a>
+              <a href="#showcase">Showcase</a>
+              <a href="#philosophy">Philosophy</a>
+            </div>
+            <div class="footer-col">
+              <strong>Project</strong>
+              <a href="#roadmap">Roadmap</a>
+              <a href="#code">Code preview</a>
+              <a href="https://github.com/GitAvaneesh/framm" target="_blank">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>Framm · Built in C++ · Open source</span>
+          <span>Coming soon</span>
+        </div>
+      </footer>
+
+    </div><!-- /page-shell -->
+
+    <script src="script.js"></script>
+  </body>
+</html>

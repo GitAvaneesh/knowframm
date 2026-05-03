@@ -1,0 +1,8 @@
+{
+  "name": "Framm",
+  "short_name": "Framm",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#2563eb"
+}
