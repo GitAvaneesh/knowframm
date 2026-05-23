@@ -1,331 +1,342 @@
-/* ═══════════════════════════════════════
-   FRAMM · script.js
-═══════════════════════════════════════ */
+/* ============================================================
+   FRAMM — script.js
+   Production website JavaScript
+   gitavaneesh.github.io/knowframm
+   ============================================================ */
 
-/* ── LOADER ──────────────────────────── */
-window.addEventListener('load', () => {
-  const loader = document.getElementById('loader');
-  if (!loader) return;
-  setTimeout(() => {
-    loader.classList.add('hidden');
-    document.body.style.cursor = 'none';
-    triggerHeroReveal();
-  }, 1600);
+'use strict';
+
+/* ── DOM Ready ──────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  initNavbar();
+  initMobileNav();
+  initScrollReveal();
+  initScrollSpy();
+  initStatCounters();
+  initStatBar();
+  initNamespaceFilter();
+  initNamespaceSearch();
+  initInstallTabs();
+  initCodeCopy();
+  initBackToTop();
+  initHeroTyping();
+  initFileTreeToggles();
+  initRoadmapProgress();
 });
 
-/* ── CUSTOM CURSOR ───────────────────── */
-(function initCursor() {
-  const cursor      = document.getElementById('cursor');
-  const cursorTrail = document.getElementById('cursorTrail');
-  if (!cursor || !cursorTrail) return;
+/* ── Navbar ───────────────────────────────────────────────── */
+function initNavbar() {
+  const navbar = document.getElementById('navbar');
+  if (!navbar) return;
+  const onScroll = () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
 
-  let mouseX = 0, mouseY = 0;
-  let trailX = 0, trailY = 0;
-  let rafId;
-
-  document.addEventListener('mousemove', e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top  = mouseY + 'px';
-  });
-
-  function animateTrail() {
-    trailX += (mouseX - trailX) * 0.14;
-    trailY += (mouseY - trailY) * 0.14;
-    cursorTrail.style.left = trailX + 'px';
-    cursorTrail.style.top  = trailY + 'px';
-    rafId = requestAnimationFrame(animateTrail);
-  }
-  animateTrail();
-
-  // Scale cursor on interactive elements
-  const interactives = 'a, button, [data-tab], .cp-toggle, .al-mod';
-  document.addEventListener('mouseover', e => {
-    if (e.target.closest(interactives)) {
-      cursor.style.transform = 'translate(-50%, -50%) scale(2)';
-      cursor.style.opacity   = '0.7';
-      cursorTrail.style.transform = 'translate(-50%, -50%) scale(0.5)';
-    }
-  });
-
-  document.addEventListener('mouseout', e => {
-    if (e.target.closest(interactives)) {
-      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-      cursor.style.opacity   = '1';
-      cursorTrail.style.transform = 'translate(-50%, -50%) scale(1)';
-    }
-  });
-
-  // Hide when leaving window
-  document.addEventListener('mouseleave', () => {
-    cursor.style.opacity = '0';
-    cursorTrail.style.opacity = '0';
-  });
-  document.addEventListener('mouseenter', () => {
-    cursor.style.opacity = '1';
-    cursorTrail.style.opacity = '1';
-  });
-})();
-
-/* ── TOPBAR SCROLL EFFECT ────────────── */
-(function initTopbar() {
-  const topbar = document.getElementById('topbar');
-  if (!topbar) return;
-
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        topbar.classList.toggle('scrolled', window.scrollY > 40);
-        ticking = false;
-      });
-      ticking = true;
-    }
-  });
-})();
-
-/* ── MOBILE MENU ─────────────────────── */
-(function initMobileMenu() {
-  const toggle = document.getElementById('menuToggle');
-  const nav    = document.getElementById('mobileNav');
-  if (!toggle || !nav) return;
+/* ── Mobile Nav ───────────────────────────────────────────── */
+function initMobileNav() {
+  const toggle = document.getElementById('nav-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  if (!toggle || !mobileNav) return;
 
   toggle.addEventListener('click', () => {
-    nav.classList.toggle('open');
-    toggle.classList.toggle('open');
+    const open = toggle.classList.toggle('open');
+    mobileNav.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
   });
 
   // Close on link click
-  nav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('open');
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
       toggle.classList.remove('open');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
     });
   });
-})();
 
-/* ── HERO REVEAL ─────────────────────── */
-function triggerHeroReveal() {
-  document.querySelectorAll('.hero .reveal').forEach((el, i) => {
-    setTimeout(() => el.classList.add('visible'), i * 120);
+  // Close on outside click
+  document.addEventListener('click', e => {
+    if (!toggle.contains(e.target) && !mobileNav.contains(e.target)) {
+      toggle.classList.remove('open');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }
   });
 }
 
-/* ── SCROLL REVEAL ───────────────────── */
-(function initScrollReveal() {
-  const elements = document.querySelectorAll('.reveal:not(.hero .reveal)');
+/* ── Scroll Reveal ────────────────────────────────────────── */
+function initScrollReveal() {
+  const elements = document.querySelectorAll('.reveal');
+  if (!elements.length) return;
 
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          // Stagger children if they are step-cards or similar
-          const children = entry.target.querySelectorAll('.step-card, .perf-card, .dx-item, .use-card, .pillar, .rm-item, .sf-item, .arch-pillar');
-          children.forEach((child, i) => {
-            setTimeout(() => child.classList.add('visible'), i * 80);
-          });
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
-  );
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
   elements.forEach(el => observer.observe(el));
+}
 
-  // Metric fills animate on visibility
-  const metricBlocks = document.querySelectorAll('.metric-block');
-  const metricObserver = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          metricObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.3 }
-  );
-  metricBlocks.forEach(el => metricObserver.observe(el));
-})();
-
-/* ── ACTIVE NAV LINK ─────────────────── */
-(function initActiveNav() {
+/* ── Scroll Spy ───────────────────────────────────────────── */
+function initScrollSpy() {
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+  if (!sections.length || !navLinks.length) return;
 
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          navLinks.forEach(link => {
-            link.style.color = link.getAttribute('href') === `#${id}`
-              ? 'var(--accent)'
-              : '';
-          });
-        }
-      });
-    },
-    { threshold: 0.4 }
-  );
-
-  sections.forEach(s => observer.observe(s));
-})();
-
-/* ── CODE TABS ───────────────────────── */
-(function initCodeTabs() {
-  const tabsContainer = document.getElementById('codeTabs');
-  if (!tabsContainer) return;
-
-  const buttons  = tabsContainer.querySelectorAll('.tab-btn');
-  const contents = tabsContainer.querySelectorAll('.tab-content');
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.tab;
-
-      buttons.forEach(b => b.classList.remove('active'));
-      contents.forEach(c => c.classList.remove('active'));
-
-      btn.classList.add('active');
-      const targetContent = tabsContainer.querySelector(`[data-content="${target}"]`);
-      if (targetContent) {
-        targetContent.classList.add('active');
-        // Fade-in effect
-        targetContent.style.opacity = '0';
-        requestAnimationFrame(() => {
-          targetContent.style.transition = 'opacity 0.25s ease';
-          targetContent.style.opacity = '1';
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          const active = link.getAttribute('href') === '#' + entry.target.id;
+          link.classList.toggle('active', active);
         });
       }
     });
-  });
-})();
+  }, { rootMargin: '-40% 0px -55% 0px' });
 
-/* ── SMOOTH SCROLL OFFSET ────────────── */
-(function initSmoothScroll() {
-  const TOPBAR_H = 60;
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', e => {
-      const href = anchor.getAttribute('href');
-      if (href === '#') return;
-      const target = document.querySelector(href);
-      if (!target) return;
-      e.preventDefault();
-      const y = target.getBoundingClientRect().top + window.scrollY - TOPBAR_H;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    });
-  });
-})();
+  sections.forEach(s => observer.observe(s));
+}
 
-/* ── PANEL SIDEBAR INTERACTION ───────── */
-(function initPanelSidebar() {
-  const items = document.querySelectorAll('.sidebar-item');
-  items.forEach(item => {
-    item.addEventListener('click', () => {
-      items.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-    });
-  });
-})();
+/* ── Stat Counters ────────────────────────────────────────── */
+function initStatCounters() {
+  const counters = document.querySelectorAll('[data-count]');
+  if (!counters.length) return;
 
-/* ── TOGGLE INTERACTION ──────────────── */
-(function initToggles() {
-  document.querySelectorAll('.cp-toggle').forEach(toggle => {
-    toggle.addEventListener('click', () => {
-      toggle.classList.toggle('active');
-    });
-  });
-})();
+  const easeOutExpo = t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
 
-/* ── ARCHITECTURE MODULE HOVER ───────── */
-(function initArchHover() {
-  document.querySelectorAll('.al-mod').forEach(mod => {
-    mod.addEventListener('mouseenter', () => {
-      mod.parentElement.querySelectorAll('.al-mod').forEach(m => {
-        m.style.opacity = m === mod ? '1' : '0.4';
-      });
-    });
-    mod.addEventListener('mouseleave', () => {
-      mod.parentElement.querySelectorAll('.al-mod').forEach(m => {
-        m.style.opacity = '1';
-      });
-    });
-  });
-})();
+  const animate = (el) => {
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const prefix = el.dataset.prefix || '';
+    const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
+    const duration = 1400;
+    const start = performance.now();
 
-/* ── MARQUEE PAUSE ON HOVER ──────────── */
-(function initMarquee() {
-  const track = document.querySelector('.marquee-content');
-  if (!track) return;
-  const section = track.closest('.marquee-section');
-  if (!section) return;
-  section.addEventListener('mouseenter', () => {
-    track.style.animationPlayState = 'paused';
-  });
-  section.addEventListener('mouseleave', () => {
-    track.style.animationPlayState = 'running';
-  });
-})();
+    const tick = (now) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const value = target * easeOutExpo(progress);
+      el.textContent = prefix + value.toFixed(decimals) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
 
-/* ── COUNTER ANIMATION (hero stats) ──── */
-(function initCounters() {
-  function animateValue(el, start, end, duration, suffix) {
-    let startTime = null;
-    const isFloat = String(end).includes('.');
-    const decimals = isFloat ? String(end).split('.')[1].length : 0;
-
-    function step(ts) {
-      if (!startTime) startTime = ts;
-      const progress = Math.min((ts - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = start + (end - start) * eased;
-      el.textContent = current.toFixed(decimals) + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  const stats = document.querySelectorAll('.hero-stats .stat');
-  const observer = new IntersectionObserver(entries => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const strong = entry.target.querySelector('strong');
-      if (!strong || strong.dataset.animated) return;
-      strong.dataset.animated = '1';
-
-      const text = strong.textContent.trim();
-      const match = text.match(/^([0-9.]+)(.*)$/);
-      if (!match) return;
-
-      const end = parseFloat(match[1]);
-      const suffix = match[2];
-      animateValue(strong, 0, end, 1400, suffix);
-      observer.unobserve(entry.target);
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        observer.unobserve(entry.target);
+      }
     });
   }, { threshold: 0.5 });
 
-  stats.forEach(s => observer.observe(s));
+  counters.forEach(el => observer.observe(el));
+}
+
+/* ── Stat Bar animated underline ─────────────────────────── */
+function initStatBar() {
+  const items = document.querySelectorAll('.stat-item');
+  if (!items.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('animated'), 200);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  items.forEach(el => observer.observe(el));
+}
+
+/* ── Namespace Filter & Search ────────────────────────────── */
+function initNamespaceFilter() {
+  const filters = document.querySelectorAll('.ns-filter');
+  const cards = document.querySelectorAll('.ns-card');
+  if (!filters.length || !cards.length) return;
+
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.filter;
+      cards.forEach(card => {
+        const match = cat === 'all' || card.dataset.category === cat;
+        card.style.display = match ? '' : 'none';
+        if (match) {
+          card.style.animation = 'none';
+          card.offsetHeight;
+          card.style.animation = 'fade-up 0.35s ease forwards';
+        }
+      });
+    });
+  });
+}
+
+function initNamespaceSearch() {
+  const input = document.getElementById('ns-search');
+  const cards = document.querySelectorAll('.ns-card');
+  if (!input || !cards.length) return;
+
+  input.addEventListener('input', () => {
+    const q = input.value.toLowerCase().trim();
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = (!q || text.includes(q)) ? '' : 'none';
+    });
+  });
+}
+
+/* ── Install Tabs ─────────────────────────────────────────── */
+function initInstallTabs() {
+  const tabs = document.querySelectorAll('.install-tab');
+  const panels = document.querySelectorAll('.install-panel');
+  if (!tabs.length) return;
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const panel = document.getElementById('panel-' + tab.dataset.tab);
+      if (panel) panel.classList.add('active');
+    });
+  });
+}
+
+/* ── Code Copy ────────────────────────────────────────────── */
+function initCodeCopy() {
+  document.querySelectorAll('.code-block-copy').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const pre = btn.closest('.code-block')?.querySelector('pre');
+      if (!pre) return;
+      try {
+        await navigator.clipboard.writeText(pre.textContent.trim());
+        const orig = btn.innerHTML;
+        btn.innerHTML = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 8 5 12 15 3"/></svg> Copied`;
+        btn.style.color = 'var(--green)';
+        setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 2000);
+      } catch (_) {}
+    });
+  });
+}
+
+/* ── Back to Top ──────────────────────────────────────────── */
+function initBackToTop() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 600);
+  }, { passive: true });
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+/* ── Hero Typing Effect ────────────────────────────────────── */
+function initHeroTyping() {
+  const el = document.getElementById('hero-typed');
+  if (!el) return;
+  const words = [
+    'framm::widgets',
+    'framm::charts',
+    'framm::i18n',
+    'framm::anim',
+    'framm::render',
+    'framm::a11y',
+    'framm::unicode',
+    'framm::platform',
+  ];
+  let wi = 0, ci = 0, deleting = false;
+  const SPEED_TYPE = 55, SPEED_DEL = 28, PAUSE = 1800;
+
+  const tick = () => {
+    const word = words[wi];
+    if (!deleting) {
+      el.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; setTimeout(tick, PAUSE); return; }
+    } else {
+      el.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
+    }
+    setTimeout(tick, deleting ? SPEED_DEL : SPEED_TYPE);
+  };
+  setTimeout(tick, 900);
+}
+
+/* ── File Tree Toggles ────────────────────────────────────── */
+function initFileTreeToggles() {
+  document.querySelectorAll('.ft-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      const open = target.style.display !== 'none';
+      target.style.display = open ? 'none' : '';
+      btn.querySelector('.ft-arrow')?.classList.toggle('open', !open);
+    });
+  });
+}
+
+/* ── Roadmap Progress ─────────────────────────────────────── */
+function initRoadmapProgress() {
+  const bars = document.querySelectorAll('.roadmap-progress-bar');
+  if (!bars.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bar = entry.target;
+        bar.style.width = bar.dataset.progress + '%';
+        observer.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.5 });
+  bars.forEach(b => observer.observe(b));
+}
+
+/* ── Smooth Anchor Scroll ─────────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
+    const top = target.getBoundingClientRect().top + window.scrollY - navH - 8;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+
+/* ── Ticker clone for seamless loop ───────────────────────── */
+(function initTicker() {
+  const ticker = document.querySelector('.ticker');
+  if (!ticker) return;
+  const clone = ticker.innerHTML;
+  ticker.innerHTML += clone;
 })();
 
-/* ── KEYBOARD NAVIGATION ─────────────── */
-(function initKeyNav() {
-  document.addEventListener('keydown', e => {
-    // Tab tabs via arrow keys
-    const tabsContainer = document.getElementById('codeTabs');
-    if (!tabsContainer) return;
-    const buttons = [...tabsContainer.querySelectorAll('.tab-btn')];
-    const activeIdx = buttons.findIndex(b => b.classList.contains('active'));
+/* ── Hover parallax on hero code block ───────────────────── */
+(function initHeroParallax() {
+  const card = document.querySelector('.hero-code-block');
+  if (!card) return;
+  let rafId = null;
+  const container = card.parentElement;
 
-    if (e.key === 'ArrowRight' && document.activeElement.closest('#codeTabs')) {
-      const next = buttons[(activeIdx + 1) % buttons.length];
-      next.click(); next.focus();
-    }
-    if (e.key === 'ArrowLeft' && document.activeElement.closest('#codeTabs')) {
-      const prev = buttons[(activeIdx - 1 + buttons.length) % buttons.length];
-      prev.click(); prev.focus();
-    }
+  container.addEventListener('mousemove', e => {
+    if (rafId) return;
+    rafId = requestAnimationFrame(() => {
+      const rect = container.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width  - 0.5;
+      const y = (e.clientY - rect.top)  / rect.height - 0.5;
+      card.style.transform = `perspective(1000px) rotateY(${x * 6}deg) rotateX(${-y * 4}deg) translateZ(4px)`;
+      rafId = null;
+    });
+  });
+
+  container.addEventListener('mouseleave', () => {
+    card.style.transform = '';
   });
 })();

@@ -1,1082 +1,1642 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Framm | Modern C++ UI Engine</title>
-    <meta name="description" content="Framm is a modern, performance-oriented C++ UI engine built for developers who demand control, clarity, and efficient native interfaces." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Framm — Modern C++ UI Engine</title>
+  <meta name="description" content="Framm is a performance-first, open-source C++ UI engine built to compete with Qt. Charts, i18n, RTL, emoji, accessibility — everything included." />
+  <meta name="keywords" content="framm, c++ ui, native ui framework, qt alternative, open source ui engine, c++ gui" />
+  <meta property="og:title" content="Framm — Modern C++ UI Engine" />
+  <meta property="og:description" content="Performance-first C++ UI engine. Beats Qt on speed, stays 100% open source." />
+  <meta property="og:url" content="https://gitavaneesh.github.io/knowframm" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
 
-    <!-- LOADER -->
-    <div class="loader" id="loader">
-      <div class="loader-inner">
-        <span class="loader-logo">FRAMM</span>
-        <div class="loader-bar"><div class="loader-fill"></div></div>
-        <span class="loader-status">Initializing engine...</span>
+<!-- ══════════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="logo.png" alt="Framm logo" width="28" height="28" />
+        Framm<span class="logo-dot">.</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#features"    class="nav-link">Features</a>
+        <a href="#namespaces"  class="nav-link">Namespaces</a>
+        <a href="#architecture" class="nav-link">Architecture</a>
+        <a href="#backends"    class="nav-link">Backends</a>
+        <a href="#roadmap"     class="nav-link">Roadmap</a>
+        <a href="#structure"   class="nav-link">Structure</a>
+        <a href="#compare"     class="nav-link">vs Qt</a>
+        <a href="#getstarted"  class="nav-link">Get Started</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://github.com/GitAvaneesh/framm" target="_blank" rel="noopener" class="nav-star">
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor">
+            <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/>
+          </svg>
+          Star
+        </a>
+        <a href="https://github.com/GitAvaneesh/framm" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+
+      <button id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div id="mobile-nav">
+  <a href="#features"     class="mobile-nav-link">
+    <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+    Features
+  </a>
+  <a href="#namespaces"   class="mobile-nav-link">
+    <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4h14M1 8h8M1 12h10"/></svg>
+    Namespaces
+  </a>
+  <a href="#architecture" class="mobile-nav-link">
+    <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="1" width="8" height="4" rx="1"/><rect x="1" y="11" width="5" height="4" rx="1"/><rect x="10" y="11" width="5" height="4" rx="1"/><path d="M8 5v3M4.5 8H11.5M4 11V8M12 11V8"/></svg>
+    Architecture
+  </a>
+  <a href="#backends"     class="mobile-nav-link">
+    <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="14" height="4" rx="1"/><rect x="1" y="7" width="14" height="4" rx="1"/><circle cx="13" cy="3" r="1" fill="currentColor"/><circle cx="13" cy="9" r="1" fill="currentColor"/></svg>
+    Backends
+  </a>
+  <div class="mobile-nav-sep"></div>
+  <a href="#roadmap"      class="mobile-nav-link">
+    <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h14M1 8l4-4M1 8l4 4"/></svg>
+    Roadmap
+  </a>
+  <a href="#getstarted"   class="mobile-nav-link">
+    <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 6 2 8 4 10"/><polyline points="12 6 14 8 12 10"/><line x1="9" y1="3" x2="7" y2="13"/></svg>
+    Get Started
+  </a>
+  <a href="https://github.com/GitAvaneesh/framm" target="_blank" class="mobile-nav-link" style="color:var(--accent)">
+    <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+    github.com/GitAvaneesh/framm
+  </a>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero-inner flex gap-64" style="flex-wrap:wrap; align-items:center;">
+
+      <!-- Left -->
+      <div style="flex:1; min-width:300px;">
+        <div class="hero-eyebrow">
+          <div class="hero-eyebrow-line"></div>
+          <span class="label">Open Source C++ UI Engine</span>
+          <span class="badge badge-green badge-dot">v0.2 Alpha</span>
+        </div>
+
+        <h1 class="display-xl hero-title">
+          <span class="line-1">Build native</span>
+          <span class="line-2">UI that flies.</span>
+        </h1>
+
+        <p class="hero-sub">
+          Framm is a performance-first, 100% open-source C++ UI engine with
+          charts, RTL, emoji, i18n, accessibility, and 50+ namespaces —
+          built to make Qt optional.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#getstarted" class="btn btn-primary btn-lg">
+            <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 6 2 8 4 10"/><polyline points="12 6 14 8 12 10"/><line x1="9" y1="3" x2="7" y2="13"/></svg>
+            Get Started
+          </a>
+          <a href="https://github.com/GitAvaneesh/framm" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">
+            <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+            View Source
+          </a>
+          <a href="https://gitavaneesh.github.io/knowframm" target="_blank" class="btn btn-ghost btn-lg">
+            <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="7"/><path d="M5.5 8c0-3 1-5.5 2.5-5.5S10.5 5 10.5 8s-1 5.5-2.5 5.5S5.5 11 5.5 8Z"/><line x1="1" y1="8" x2="15" y2="8"/></svg>
+            Docs
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num"><data-count data-count="1.9" data-suffix="ms" data-decimals="1">1.9ms</data-count></div>
+            <div class="hero-stat-label">Render latency</div>
+          </div>
+          <div class="hero-stat-sep"></div>
+          <div>
+            <div class="hero-stat-num"><span data-count="99" data-suffix=".8%" data-decimals="0">99.8%</span></div>
+            <div class="hero-stat-label">Frame stability</div>
+          </div>
+          <div class="hero-stat-sep"></div>
+          <div>
+            <div class="hero-stat-num"><span data-count="4" data-suffix=".1MB" data-decimals="0">4.1MB</span></div>
+            <div class="hero-stat-label">Runtime footprint</div>
+          </div>
+          <div class="hero-stat-sep"></div>
+          <div>
+            <div class="hero-stat-num"><span data-count="12" data-suffix="ms" data-decimals="0">12ms</span></div>
+            <div class="hero-stat-label">Cold startup</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right — Code Block -->
+      <div class="hero-visual" style="flex:1; min-width:300px; max-width:520px;">
+        <div class="hero-code-block" style="transition: transform 0.2s ease;">
+          <div class="code-titlebar">
+            <div class="code-dots">
+              <div class="code-dot code-dot-r"></div>
+              <div class="code-dot code-dot-y"></div>
+              <div class="code-dot code-dot-g"></div>
+            </div>
+            <span class="code-filename">main.cpp — Framm</span>
+            <span></span>
+          </div>
+          <div class="code-body">
+            <div class="code-line"><span class="code-ln">1</span><span class="c-cmt">// Hello, Framm</span></div>
+            <div class="code-line"><span class="code-ln">2</span><span class="c-kw">#include</span> <span class="c-str">&lt;framm/framm.h&gt;</span></div>
+            <div class="code-line"><span class="code-ln">3</span>&nbsp;</div>
+            <div class="code-line"><span class="code-ln">4</span><span class="c-kw">int</span> <span class="c-fn">main</span><span class="c-op">()</span> <span class="c-op">{</span></div>
+            <div class="code-line"><span class="code-ln">5</span>&nbsp;&nbsp;<span class="c-ns">framm</span><span class="c-op">::</span><span class="c-type">App</span> app<span class="c-op">;</span></div>
+            <div class="code-line"><span class="code-ln">6</span>&nbsp;</div>
+            <div class="code-line"><span class="code-ln">7</span>&nbsp;&nbsp;<span class="c-ns">framm</span><span class="c-op">::</span><span class="c-type">Window</span> win <span class="c-op">=</span> app<span class="c-op">.</span><span class="c-fn">window</span><span class="c-op">({</span></div>
+            <div class="code-line"><span class="code-ln">8</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-op">.</span>title  <span class="c-op">=</span> <span class="c-str">"My App"</span><span class="c-op">,</span></div>
+            <div class="code-line"><span class="code-ln">9</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-op">.</span>width  <span class="c-op">=</span> <span class="c-num">1200</span><span class="c-op">,</span></div>
+            <div class="code-line"><span class="code-ln">10</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-op">.</span>height <span class="c-op">=</span> <span class="c-num">800</span><span class="c-op">,</span></div>
+            <div class="code-line"><span class="code-ln">11</span>&nbsp;&nbsp;<span class="c-op">});</span></div>
+            <div class="code-line"><span class="code-ln">12</span>&nbsp;</div>
+            <div class="code-line"><span class="code-ln">13</span>&nbsp;&nbsp;win<span class="c-op">.</span><span class="c-fn">root</span><span class="c-op">(</span></div>
+            <div class="code-line"><span class="code-ln">14</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-ns">framm</span><span class="c-op">::</span><span class="c-fn">Column</span><span class="c-op">({</span></div>
+            <div class="code-line"><span class="code-ln">15</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-ns">framm</span><span class="c-op">::</span><span class="c-fn">Text</span><span class="c-op">(</span><span class="c-str">"Hello, Framm!"</span><span class="c-op">),</span></div>
+            <div class="code-line"><span class="code-ln">16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-ns">framm</span><span class="c-op">::</span><span class="c-fn">Button</span><span class="c-op">(</span><span class="c-str">"Click me"</span><span class="c-op">),</span></div>
+            <div class="code-line"><span class="code-ln">17</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-op">})</span></div>
+            <div class="code-line"><span class="code-ln">18</span>&nbsp;&nbsp;<span class="c-op">);</span></div>
+            <div class="code-line"><span class="code-ln">19</span>&nbsp;</div>
+            <div class="code-line"><span class="code-ln">20</span>&nbsp;&nbsp;<span class="c-kw">return</span> app<span class="c-op">.</span><span class="c-fn">run</span><span class="c-op">();</span></div>
+            <div class="code-line"><span class="code-ln">21</span><span class="c-op">}</span></div>
+          </div>
+        </div>
+
+        <!-- Typing indicator -->
+        <div style="margin-top:14px; display:flex; align-items:center; gap:10px;">
+          <span class="label-dim">Try:</span>
+          <code class="mono" style="color:var(--accent); font-size:13px;" id="hero-typed"></code>
+          <span style="width:2px;height:16px;background:var(--accent);display:inline-block;animation:blink 1s steps(1) infinite;"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     TICKER
+══════════════════════════════════════════════════════════ -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item"><span class="sep"></span><span class="hl">framm::charts</span></div>
+    <div class="ticker-item"><span class="sep"></span>OpenGL · Vulkan · DX11 · DX12 · WebGPU</div>
+    <div class="ticker-item"><span class="sep"></span><span class="hl">framm::i18n</span></div>
+    <div class="ticker-item"><span class="sep"></span>RTL · BiDi · Arabic · Hindi · CJK</div>
+    <div class="ticker-item"><span class="sep"></span><span class="hl">framm::unicode</span></div>
+    <div class="ticker-item"><span class="sep"></span>Emoji · Flags · ZWJ Sequences</div>
+    <div class="ticker-item"><span class="sep"></span><span class="hl">framm::a11y</span></div>
+    <div class="ticker-item"><span class="sep"></span>Screen Reader · Tab Order · High Contrast</div>
+    <div class="ticker-item"><span class="sep"></span><span class="hl">framm::anim</span></div>
+    <div class="ticker-item"><span class="sep"></span>Spring · Keyframe · Page Transition</div>
+    <div class="ticker-item"><span class="sep"></span><span class="hl">framm::platform</span></div>
+    <div class="ticker-item"><span class="sep"></span>Linux · Windows · Android · WASM</div>
+    <div class="ticker-item"><span class="sep"></span><span class="hl">No Metal. 100% Open.</span></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     STATS BAR
+══════════════════════════════════════════════════════════ -->
+<div id="stats-bar">
+  <div class="container">
+    <div class="stats-bar-inner">
+      <div class="stat-item reveal">
+        <div class="stat-value"><span data-count="1" data-suffix="" data-decimals="0" class="accent">1</span>,200<span class="accent">+</span></div>
+        <div class="stat-desc">Source files</div>
+        <div class="stat-bar-bottom"></div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-value"><span data-count="50" data-decimals="0">50</span><span class="accent">+</span></div>
+        <div class="stat-desc">Namespaced modules</div>
+        <div class="stat-bar-bottom"></div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-value"><span data-count="5" data-decimals="0">5</span></div>
+        <div class="stat-desc">Render backends</div>
+        <div class="stat-bar-bottom"></div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-value"><span data-count="68" data-suffix="%" data-decimals="0">68%</span></div>
+        <div class="stat-desc">Fewer draw calls</div>
+        <div class="stat-bar-bottom"></div>
+      </div>
+      <div class="stat-item reveal reveal-delay-4">
+        <div class="stat-value"><span class="accent">100</span>%</div>
+        <div class="stat-desc">Open source (MIT)</div>
+        <div class="stat-bar-bottom"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     FEATURES
+══════════════════════════════════════════════════════════ -->
+<section id="features" class="section">
+  <div class="container">
+    <div class="section-header section-header-centered reveal">
+      <div class="label">What's inside</div>
+      <h2 class="display-lg section-title">Everything Qt has.<br>Nothing it doesn't.</h2>
+      <p class="section-sub">Enterprise-grade features from day one. No paid tiers, no commercial licenses, no proprietary backends.</p>
+    </div>
+
+    <div class="features-grid">
+
+      <!-- Charts -->
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--accent)" stroke-width="1.5">
+            <polyline points="2 16 7 10 11 13 18 4"/>
+            <line x1="2" y1="18" x2="18" y2="18"/>
+          </svg>
+        </div>
+        <div class="feature-name">Charts &amp; Data Viz</div>
+        <div class="feature-desc">Line, Bar, Pie, Scatter, Candlestick, Heatmap, Treemap — with real-time streaming and interactive zoom/pan.</div>
+        <div class="feature-tag">framm::charts</div>
+      </div>
+
+      <!-- i18n -->
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--accent)" stroke-width="1.5">
+            <circle cx="10" cy="10" r="8"/>
+            <path d="M10 2c0 0-4 3-4 8s4 8 4 8M10 2c0 0 4 3 4 8s-4 8-4 8"/>
+            <line x1="2" y1="10" x2="18" y2="10"/>
+          </svg>
+        </div>
+        <div class="feature-name">Full Internationalization</div>
+        <div class="feature-desc">Locale detection, .po/.ftl translation, plural rules, date/number/currency formatting, timezone support.</div>
+        <div class="feature-tag">framm::i18n</div>
+      </div>
+
+      <!-- RTL -->
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--accent)" stroke-width="1.5">
+            <line x1="18" y1="5" x2="6" y2="5"/>
+            <polyline points="10 1 6 5 10 9"/>
+            <line x1="18" y1="15" x2="2" y2="15"/>
+            <polyline points="6 11 2 15 6 19"/>
+          </svg>
+        </div>
+        <div class="feature-name">RTL &amp; BiDi Text</div>
+        <div class="feature-desc">Full right-to-left layout mirroring. Unicode BiDi algorithm for Arabic, Hebrew, Urdu — mixed scripts handled correctly.</div>
+        <div class="feature-tag">framm::i18n::rtl</div>
+      </div>
+
+      <!-- Emoji -->
+      <div class="feature-card reveal reveal-delay-3">
+        <div class="feature-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--accent)" stroke-width="1.5">
+            <circle cx="10" cy="10" r="8"/>
+            <circle cx="7" cy="8" r="1" fill="var(--accent)"/>
+            <circle cx="13" cy="8" r="1" fill="var(--accent)"/>
+            <path d="M7 13c0.8 1.5 5.2 1.5 6 0"/>
+          </svg>
+        </div>
+        <div class="feature-name">Emoji &amp; Flags</div>
+        <div class="feature-desc">Color emoji rendering (Noto/Twemoji), flag sequences, ZWJ family emoji, skin tone modifiers — all correctly shaped.</div>
+        <div class="feature-tag">framm::unicode::emoji</div>
+      </div>
+
+      <!-- Accessibility -->
+      <div class="feature-card reveal reveal-delay-4">
+        <div class="feature-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--accent)" stroke-width="1.5">
+            <circle cx="10" cy="4" r="2"/>
+            <path d="M10 6v7M7 9h6M7 16l3-3 3 3"/>
+          </svg>
+        </div>
+        <div class="feature-name">Accessibility (a11y)</div>
+        <div class="feature-desc">Screen reader API (NVDA, VoiceOver, TalkBack), ARIA-style roles, keyboard navigation, tab order, high contrast mode.</div>
+        <div class="feature-tag">framm::a11y</div>
+      </div>
+
+      <!-- Render Backends -->
+      <div class="feature-card reveal reveal-delay-5">
+        <div class="feature-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--accent)" stroke-width="1.5">
+            <rect x="2" y="3" width="16" height="12" rx="2"/>
+            <line x1="6" y1="18" x2="14" y2="18"/>
+            <line x1="10" y1="15" x2="10" y2="18"/>
+          </svg>
+        </div>
+        <div class="feature-name">5 Render Backends</div>
+        <div class="feature-desc">OpenGL, Vulkan, DirectX 11/12, WebGPU, and a software fallback. Metal removed — fully open, no proprietary lock-in.</div>
+        <div class="feature-tag">framm::render</div>
+      </div>
+
+      <!-- Widgets -->
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--accent)" stroke-width="1.5">
+            <rect x="2" y="2" width="7" height="7" rx="1"/>
+            <rect x="11" y="2" width="7" height="7" rx="1"/>
+            <rect x="2" y="11" width="7" height="7" rx="1"/>
+            <rect x="11" y="11" width="7" height="7" rx="1"/>
+          </svg>
+        </div>
+        <div class="feature-name">80+ Widgets</div>
+        <div class="feature-desc">Inputs, pickers, tables, trees, modals, drawers, tooltips, toasts, skeletons, data grids — everything in one library.</div>
+        <div class="feature-tag">framm::widgets</div>
+      </div>
+
+      <!-- Animation -->
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--accent)" stroke-width="1.5">
+            <circle cx="5" cy="15" r="2"/>
+            <circle cx="15" cy="5" r="2"/>
+            <path d="M5 13C5 7 9 5 15 5" stroke-dasharray="3 2"/>
+          </svg>
+        </div>
+        <div class="feature-name">Physics Animations</div>
+        <div class="feature-desc">Spring, keyframe, easing curves, page transitions, enter/exit motion, staggered sequences — zero runtime overhead.</div>
+        <div class="feature-tag">framm::anim</div>
+      </div>
+
+      <!-- Platform -->
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--accent)" stroke-width="1.5">
+            <rect x="2" y="4" width="16" height="11" rx="2"/>
+            <path d="M8 15l-2 3M12 15l2 3M6 18h8"/>
+          </svg>
+        </div>
+        <div class="feature-name">Platform Integration</div>
+        <div class="feature-desc">Native dialogs, system tray, clipboard, drag &amp; drop, notifications, DPI scaling — Linux (X11/Wayland), Windows, Android, WASM.</div>
+        <div class="feature-tag">framm::platform</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     NAMESPACES
+══════════════════════════════════════════════════════════ -->
+<section id="namespaces" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="label">API Surface</div>
+      <h2 class="display-lg section-title">Every namespace,<br>every module.</h2>
+      <p class="section-sub">Framm is organized into 50+ namespaced modules — each focused, testable, and independently includable.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="flex items-center gap-16" style="flex-wrap:wrap; margin-bottom:20px;">
+        <div class="ns-search-wrap" style="margin-bottom:0;">
+          <div class="ns-search-icon">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6.5" cy="6.5" r="5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>
+          </div>
+          <input id="ns-search" type="text" placeholder="Search namespaces..." autocomplete="off" />
+        </div>
+        <div class="ns-filter-bar">
+          <button class="ns-filter active" data-filter="all">All</button>
+          <button class="ns-filter" data-filter="core">Core</button>
+          <button class="ns-filter" data-filter="ui">UI</button>
+          <button class="ns-filter" data-filter="data">Data</button>
+          <button class="ns-filter" data-filter="text">Text</button>
+          <button class="ns-filter" data-filter="platform">Platform</button>
+          <button class="ns-filter" data-filter="tools">Tools</button>
+        </div>
       </div>
     </div>
 
-    <!-- CURSOR -->
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-trail" id="cursorTrail"></div>
+    <div class="ns-grid reveal">
 
-    <div class="page-shell">
-
-      <!-- TOPBAR -->
-      <header class="topbar" id="topbar">
-        <a class="brand" href="#overview">
-          <span class="brand-icon">▲</span>
-          <span>Framm</span>
-        </a>
-        <nav class="nav-links">
-          <a href="#problem" class="nav-link">Problem</a>
-          <a href="#approach" class="nav-link">Approach</a>
-          <a href="#performance" class="nav-link">Performance</a>
-          <a href="#architecture" class="nav-link">Architecture</a>
-          <a href="#code" class="nav-link">Code</a>
-          <a href="#philosophy" class="nav-link">Philosophy</a>
-          <a href="https://github.com/GitAvaneesh/framm" class="nav-link nav-gh" target="_blank">GitHub ↗</a>
-        </nav>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
-      </header>
-
-      <!-- MOBILE NAV -->
-      <div class="mobile-nav" id="mobileNav">
-        <a href="#problem">Problem</a>
-        <a href="#approach">Approach</a>
-        <a href="#performance">Performance</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#code">Code</a>
-        <a href="#philosophy">Philosophy</a>
-        <a href="https://github.com/GitAvaneesh/framm" target="_blank">GitHub ↗</a>
+      <div class="ns-card" data-category="core">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::core</div>
+          <div class="ns-count">26 files</div>
+        </div>
+        <div class="ns-desc">Scene graph, node tree, dirty tracking, frame clock, signals/slots, thread pool, fiber system.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">scene_graph</span>
+          <span class="ns-module-tag">dirty_tracker</span>
+          <span class="ns-module-tag">signal</span>
+          <span class="ns-module-tag">thread_pool</span>
+          <span class="ns-module-tag">fiber</span>
+        </div>
       </div>
 
-      <main>
+      <div class="ns-card" data-category="core">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::memory</div>
+          <div class="ns-count">16 files</div>
+        </div>
+        <div class="ns-desc">Pool, arena, slab, stack allocators. Ring buffer, small_vector, string pool — zero fragmentation.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">pool_allocator</span>
+          <span class="ns-module-tag">arena</span>
+          <span class="ns-module-tag">slab</span>
+          <span class="ns-module-tag">ring_buffer</span>
+        </div>
+      </div>
 
-        <!-- ═══════════════════════ HERO ═══════════════════════ -->
-        <section class="hero section" id="overview">
-          <div class="hero-bg">
-            <div class="grid-overlay"></div>
-            <div class="orb orb-1"></div>
-            <div class="orb orb-2"></div>
+      <div class="ns-card" data-category="core">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::layout</div>
+          <div class="ns-count">30 files</div>
+        </div>
+        <div class="ns-desc">Flex, Grid, Column, Row, Stack, Wrap. Constraint solver, virtual layout, RTL mirroring — one-pass for most cases.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">flex</span>
+          <span class="ns-module-tag">grid</span>
+          <span class="ns-module-tag">constraint_solver</span>
+          <span class="ns-module-tag">virtual_layout</span>
+          <span class="ns-module-tag">rtl_layout</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="ui">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::style</div>
+          <div class="ns-count">24 files</div>
+        </div>
+        <div class="ns-desc">Style sheet, cascade, inheritance, resolver. Color spaces, gradients, shadows, transforms, pseudo-states.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">style_sheet</span>
+          <span class="ns-module-tag">cascade</span>
+          <span class="ns-module-tag">color_space</span>
+          <span class="ns-module-tag">gradient</span>
+          <span class="ns-module-tag">pseudo_state</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="ui">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::theme</div>
+          <div class="ns-count">11 files</div>
+        </div>
+        <div class="ns-desc">Design tokens, dark/light/system modes, component tokens, semantic colors — auto OS detection.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">tokens</span>
+          <span class="ns-module-tag">dark</span>
+          <span class="ns-module-tag">light</span>
+          <span class="ns-module-tag">system</span>
+          <span class="ns-module-tag">builder</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="core">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::render</div>
+          <div class="ns-count">30 files</div>
+        </div>
+        <div class="ns-desc">Batch renderer, draw calls, shader program, texture atlas, framebuffer, compositor, swap chain — swappable backends.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">batch</span>
+          <span class="ns-module-tag">shader</span>
+          <span class="ns-module-tag">texture_atlas</span>
+          <span class="ns-module-tag">compositor</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="core">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::events</div>
+          <div class="ns-count">24 files</div>
+        </div>
+        <div class="ns-desc">Event bus, mouse, keyboard, touch, scroll, focus, drag/drop, gesture, IME, timers, shortcuts, global hotkeys.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">event_bus</span>
+          <span class="ns-module-tag">keyboard</span>
+          <span class="ns-module-tag">touch</span>
+          <span class="ns-module-tag">gesture</span>
+          <span class="ns-module-tag">hotkey</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="text">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::text</div>
+          <div class="ns-count">34 files</div>
+        </div>
+        <div class="ns-desc">HarfBuzz shaping, BiDi algorithm, font fallback chains, rich text, glyph cache/atlas, ligatures, hyphenation.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">shaper</span>
+          <span class="ns-module-tag">bidi</span>
+          <span class="ns-module-tag">font_fallback</span>
+          <span class="ns-module-tag">glyph_atlas</span>
+          <span class="ns-module-tag">rich_text</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="text">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::unicode</div>
+          <div class="ns-count">19 files</div>
+        </div>
+        <div class="ns-desc">UTF-8/16/32, NFC/NFD normalization, grapheme clusters, emoji, color fonts, flag sequences, ZWJ, skin tones.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">utf8</span>
+          <span class="ns-module-tag">normalization</span>
+          <span class="ns-module-tag">emoji</span>
+          <span class="ns-module-tag">flag</span>
+          <span class="ns-module-tag">zwj_sequence</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="text">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::i18n</div>
+          <div class="ns-count">19 files</div>
+        </div>
+        <div class="ns-desc">Locale detection, .po/.ftl loaders, plural rules, number/date/time/currency/list format, collation, timezone, calendar.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">locale</span>
+          <span class="ns-module-tag">translator</span>
+          <span class="ns-module-tag">plural_rules</span>
+          <span class="ns-module-tag">date_format</span>
+          <span class="ns-module-tag">rtl</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="ui">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::anim</div>
+          <div class="ns-count">19 files</div>
+        </div>
+        <div class="ns-desc">Spring, keyframe, tween, easing curves, timeline, sequence, parallel, page transitions, enter/exit motion.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">spring</span>
+          <span class="ns-module-tag">keyframe</span>
+          <span class="ns-module-tag">easing</span>
+          <span class="ns-module-tag">timeline</span>
+          <span class="ns-module-tag">page_transition</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="ui">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::widgets</div>
+          <div class="ns-count">80+ files</div>
+        </div>
+        <div class="ns-desc">Button, Input, Select, Toggle, Slider, Picker, Badge, Avatar, Toast, Skeleton, Canvas — every standard widget.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">button</span>
+          <span class="ns-module-tag">input</span>
+          <span class="ns-module-tag">select</span>
+          <span class="ns-module-tag">slider</span>
+          <span class="ns-module-tag">picker</span>
+          <span class="ns-module-tag">feedback</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="ui">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::containers</div>
+          <div class="ns-count">34 files</div>
+        </div>
+        <div class="ns-desc">Panel, Card, TabView, ScrollArea, Splitter, Modal, Drawer, Accordion, MenuBar, Toolbar, Breadcrumb, StatusBar.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">tab_view</span>
+          <span class="ns-module-tag">modal</span>
+          <span class="ns-module-tag">drawer</span>
+          <span class="ns-module-tag">scroll_area</span>
+          <span class="ns-module-tag">accordion</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="data">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::data</div>
+          <div class="ns-count">26 files</div>
+        </div>
+        <div class="ns-desc">DataTable, VirtualTable, TreeView, ListView, DataGrid, SpreadsheetGrid, Sort, Filter, Pagination, RowSelection.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">data_table</span>
+          <span class="ns-module-tag">tree_view</span>
+          <span class="ns-module-tag">virtual_list</span>
+          <span class="ns-module-tag">paginator</span>
+          <span class="ns-module-tag">column_filter</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="data">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::charts</div>
+          <div class="ns-count">42 files</div>
+        </div>
+        <div class="ns-desc">Line, Area, Bar, Pie, Donut, Scatter, Bubble, Candlestick, Heatmap, Treemap, Realtime — axes, legends, zoom/pan.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">line_chart</span>
+          <span class="ns-module-tag">bar_chart</span>
+          <span class="ns-module-tag">pie_chart</span>
+          <span class="ns-module-tag">candlestick</span>
+          <span class="ns-module-tag">realtime</span>
+          <span class="ns-module-tag">heatmap</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="ui">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::assets</div>
+          <div class="ns-count">32 files</div>
+        </div>
+        <div class="ns-desc">PNG/JPEG/WebP/BMP loader, SVG renderer, GIF/APNG player, video decoder (FFmpeg), audio player, icon packs.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">svg</span>
+          <span class="ns-module-tag">image</span>
+          <span class="ns-module-tag">video</span>
+          <span class="ns-module-tag">audio</span>
+          <span class="ns-module-tag">icons</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="platform">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::platform</div>
+          <div class="ns-count">38 files</div>
+        </div>
+        <div class="ns-desc">Native file dialogs, system tray, OS notifications, clipboard, drag &amp; drop, multi-monitor, DPI, shell open.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">dialog</span>
+          <span class="ns-module-tag">tray</span>
+          <span class="ns-module-tag">clipboard</span>
+          <span class="ns-module-tag">dnd</span>
+          <span class="ns-module-tag">screen</span>
+          <span class="ns-module-tag">shell</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="platform">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::a11y</div>
+          <div class="ns-count">16 files</div>
+        </div>
+        <div class="ns-desc">Accessible roles, ARIA labels, focus management, keyboard navigation, screen reader API, high contrast, text scale.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">roles</span>
+          <span class="ns-module-tag">focus_manager</span>
+          <span class="ns-module-tag">screen_reader</span>
+          <span class="ns-module-tag">high_contrast</span>
+          <span class="ns-module-tag">keyboard_nav</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="tools">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::net</div>
+          <div class="ns-count">12 files</div>
+        </div>
+        <div class="ns-desc">HTTP/HTTPS client, WebSocket, Server-Sent Events — built for real-time chart data and network-aware UIs.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">http_client</span>
+          <span class="ns-module-tag">websocket</span>
+          <span class="ns-module-tag">sse_client</span>
+          <span class="ns-module-tag">tls</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="tools">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::plugin</div>
+          <div class="ns-count">8 files</div>
+        </div>
+        <div class="ns-desc">Plugin manifest, loader, sandbox, hooks, registry, context — extend Framm without modifying core.</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">plugin_loader</span>
+          <span class="ns-module-tag">plugin_registry</span>
+          <span class="ns-module-tag">sandbox</span>
+          <span class="ns-module-tag">hooks</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="tools">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::bindings</div>
+          <div class="ns-count">14 files</div>
+        </div>
+        <div class="ns-desc">C ABI, Python (PyFramm), Rust (safe wrappers), Lua scripting, WebAssembly (Emscripten).</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">c</span>
+          <span class="ns-module-tag">python</span>
+          <span class="ns-module-tag">rust</span>
+          <span class="ns-module-tag">lua</span>
+          <span class="ns-module-tag">wasm</span>
+        </div>
+      </div>
+
+      <div class="ns-card" data-category="tools">
+        <div class="ns-card-head">
+          <div class="ns-name">framm::devtools</div>
+          <div class="ns-count">18 files</div>
+        </div>
+        <div class="ns-desc">Runtime inspector overlay, frame profiler, hot reload, UI test framework, structured logger, visual designer (.fui).</div>
+        <div class="ns-modules">
+          <span class="ns-module-tag">inspector</span>
+          <span class="ns-module-tag">profiler</span>
+          <span class="ns-module-tag">hotreload</span>
+          <span class="ns-module-tag">test</span>
+          <span class="ns-module-tag">designer</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     ARCHITECTURE
+══════════════════════════════════════════════════════════ -->
+<section id="architecture" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="label">How it works</div>
+      <h2 class="display-lg section-title">Four clean layers.<br>No tangled mess.</h2>
+      <p class="section-sub">Every layer has exactly one job. The render backend is swappable — plug in Vulkan, DX12, or WebGPU without touching anything else.</p>
+    </div>
+
+    <div class="arch-diagram reveal">
+      <div class="arch-layers">
+
+        <div class="arch-layer">
+          <div class="arch-layer-label">
+            <div class="arch-layer-name">Your Code</div>
+            <div class="arch-layer-level">LAYER 0</div>
           </div>
+          <div class="arch-layer-content">
+            <span class="arch-chip arch-chip-app">Application Logic</span>
+            <span class="arch-chip arch-chip-app">Business Data</span>
+            <span class="arch-chip arch-chip-app">Custom Widgets</span>
+            <span class="arch-chip arch-chip-app">Plugin Code</span>
+          </div>
+        </div>
 
-          <div class="hero-content">
-            <div class="hero-copy reveal">
-              <div class="eyebrow-wrap">
-                <span class="dot-live"></span>
-                <p class="eyebrow">Coming soon · in active development</p>
-              </div>
-              <h1 class="hero-title">
-                <span class="title-line">A UI engine</span>
-                <span class="title-line title-accent">built for C++</span>
-                <span class="title-line">developers.</span>
-              </h1>
-              <p class="hero-text">
-                Framm is designed specifically for developers who demand both control and efficiency when building native software interfaces. It is not positioned as just another UI toolkit or experimental library, but rather as a carefully engineered foundation for professional-grade applications where responsiveness, clarity, and maintainability are essential.
-              </p>
-              <p class="hero-text">
-                The purpose of Framm is to simplify the process of building modern user interfaces without sacrificing performance or introducing unnecessary complexity. It is a system that aims to provide the best parts of immediate-mode tooling and structured UI frameworks, while avoiding the weaknesses of both. Every design decision is made with the goal of improving developer workflow and reducing friction.
-              </p>
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="#problem">Explore the Engine</a>
-                <a class="btn btn-secondary" href="https://github.com/GitAvaneesh/framm" target="_blank">View on GitHub ↗</a>
-              </div>
+        <div class="arch-layer">
+          <div class="arch-layer-label">
+            <div class="arch-layer-name">Framm API</div>
+            <div class="arch-layer-level">LAYER 1</div>
+          </div>
+          <div class="arch-layer-content">
+            <span class="arch-chip arch-chip-api">framm::layout</span>
+            <span class="arch-chip arch-chip-api">framm::style</span>
+            <span class="arch-chip arch-chip-api">framm::theme</span>
+            <span class="arch-chip arch-chip-api">framm::events</span>
+            <span class="arch-chip arch-chip-api">framm::widgets</span>
+            <span class="arch-chip arch-chip-api">framm::charts</span>
+            <span class="arch-chip arch-chip-api">framm::i18n</span>
+            <span class="arch-chip arch-chip-api">framm::anim</span>
+            <span class="arch-chip arch-chip-api">framm::a11y</span>
+            <span class="arch-chip arch-chip-api">framm::text</span>
+          </div>
+        </div>
 
-              <div class="hero-stats">
-                <div class="stat">
-                  <strong>1.9ms</strong>
-                  <span>Render latency</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat">
-                  <strong>99.8%</strong>
-                  <span>Frame stability</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat">
-                  <strong>4.1MB</strong>
-                  <span>Runtime footprint</span>
-                </div>
+        <div class="arch-layer">
+          <div class="arch-layer-label">
+            <div class="arch-layer-name">Runtime Core</div>
+            <div class="arch-layer-level">LAYER 2</div>
+          </div>
+          <div class="arch-layer-content">
+            <span class="arch-chip arch-chip-core">Scene Graph</span>
+            <span class="arch-chip arch-chip-core">Dirty Tracker</span>
+            <span class="arch-chip arch-chip-core">Memory Pools</span>
+            <span class="arch-chip arch-chip-core">Thread Pool</span>
+            <span class="arch-chip arch-chip-core">Frame Clock</span>
+            <span class="arch-chip arch-chip-core">Event Loop</span>
+            <span class="arch-chip arch-chip-core">Asset Cache</span>
+            <span class="arch-chip arch-chip-core">Glyph Atlas</span>
+          </div>
+        </div>
+
+        <div class="arch-layer">
+          <div class="arch-layer-label">
+            <div class="arch-layer-name">Render Backend</div>
+            <div class="arch-layer-level">LAYER 3 — SWAPPABLE</div>
+          </div>
+          <div class="arch-layer-content">
+            <span class="arch-chip arch-chip-rend">OpenGL 3.3+</span>
+            <span class="arch-chip arch-chip-rend">Vulkan</span>
+            <span class="arch-chip arch-chip-rend">DirectX 11</span>
+            <span class="arch-chip arch-chip-rend">DirectX 12</span>
+            <span class="arch-chip arch-chip-rend">WebGPU</span>
+            <span class="arch-chip arch-chip-rend">Software</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Key Architecture Points -->
+    <div class="grid-3" style="margin-top:32px;">
+      <div class="reveal reveal-delay-1" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
+        <div style="color:var(--accent);margin-bottom:12px;">
+          <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2L2 7v6l8 5 8-5V7z"/></svg>
+        </div>
+        <div style="font-family:var(--font-display);font-weight:700;font-size:15px;margin-bottom:8px;">Dirty Tracking</div>
+        <div style="font-size:13px;color:var(--text-3);">Only changed regions of the scene graph are re-evaluated. Static sub-trees are cached and skipped entirely.</div>
+      </div>
+      <div class="reveal reveal-delay-2" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
+        <div style="color:var(--accent);margin-bottom:12px;">
+          <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="8" width="16" height="4" rx="1"/><path d="M6 8V5a2 2 0 0 1 4 0v3M10 8v3a2 2 0 0 0 4 0V8"/></svg>
+        </div>
+        <div style="font-family:var(--font-display);font-weight:700;font-size:15px;margin-bottom:8px;">Batch Renderer</div>
+        <div style="font-size:13px;color:var(--text-3);">UI elements collected by material and depth before GPU submission. Eliminates redundant state changes — 68% fewer draw calls.</div>
+      </div>
+      <div class="reveal reveal-delay-3" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
+        <div style="color:var(--accent);margin-bottom:12px;">
+          <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg>
+        </div>
+        <div style="font-family:var(--font-display);font-weight:700;font-size:15px;margin-bottom:8px;">Zero-cost Layout</div>
+        <div style="font-size:13px;color:var(--text-3);">Layout engine operates in a single forward pass for most cases. No layout thrashing, no forced reflows.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     BACKENDS
+══════════════════════════════════════════════════════════ -->
+<section id="backends" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="label">Render Backends</div>
+      <h2 class="display-lg section-title">Metal removed.<br>Everything else added.</h2>
+      <p class="section-sub">Metal is proprietary, requires Apple developer program enrollment, and goes against Framm's open-source philosophy. We replaced it with 5 fully open backends.</p>
+    </div>
+
+    <div class="backends-grid">
+
+      <div class="backend-card reveal">
+        <div style="position:absolute;top:0;right:0;width:70px;height:70px;background:var(--green);opacity:0.06;border-radius:0 var(--radius-lg) 0 70px;"></div>
+        <div class="backend-platform">Cross-Platform</div>
+        <div class="backend-name">OpenGL</div>
+        <div class="backend-desc">OpenGL 3.3+ — widest compatibility. Linux, Windows, Android, macOS. The default fallback backend.</div>
+        <div class="backend-status">
+          <div class="status-dot status-stable"></div>
+          <span style="color:var(--green);font-family:var(--font-mono);font-size:11px;">Stable</span>
+          <span style="color:var(--text-4);font-family:var(--font-mono);font-size:11px;">· Default</span>
+        </div>
+      </div>
+
+      <div class="backend-card reveal reveal-delay-1">
+        <div style="position:absolute;top:0;right:0;width:70px;height:70px;background:var(--accent-3);opacity:0.07;border-radius:0 var(--radius-lg) 0 70px;"></div>
+        <div class="backend-platform">Linux · Windows · Android</div>
+        <div class="backend-name">Vulkan</div>
+        <div class="backend-desc">Low-overhead, explicit GPU control. Best for high-performance applications with complex scenes and 1000+ nodes.</div>
+        <div class="backend-status">
+          <div class="status-dot status-beta"></div>
+          <span style="color:#ffcc00;font-family:var(--font-mono);font-size:11px;">Beta</span>
+        </div>
+      </div>
+
+      <div class="backend-card reveal reveal-delay-2">
+        <div style="position:absolute;top:0;right:0;width:70px;height:70px;background:var(--blue);opacity:0.07;border-radius:0 var(--radius-lg) 0 70px;"></div>
+        <div class="backend-platform">Windows</div>
+        <div class="backend-name">DirectX 11</div>
+        <div class="backend-desc">DirectX 11 for Windows legacy support. Broad hardware compatibility, excellent driver stability on older GPUs.</div>
+        <div class="backend-status">
+          <div class="status-dot status-beta"></div>
+          <span style="color:#ffcc00;font-family:var(--font-mono);font-size:11px;">Beta</span>
+        </div>
+      </div>
+
+      <div class="backend-card reveal reveal-delay-3">
+        <div style="position:absolute;top:0;right:0;width:70px;height:70px;background:var(--blue);opacity:0.05;border-radius:0 var(--radius-lg) 0 70px;"></div>
+        <div class="backend-platform">Windows (Modern)</div>
+        <div class="backend-name">DirectX 12</div>
+        <div class="backend-desc">DirectX 12 for modern Windows. Explicit command lists, descriptor heaps, parallel workloads — maximum throughput.</div>
+        <div class="backend-status">
+          <div class="status-dot status-planned"></div>
+          <span style="color:var(--text-3);font-family:var(--font-mono);font-size:11px;">Planned</span>
+        </div>
+      </div>
+
+      <div class="backend-card reveal reveal-delay-4">
+        <div style="position:absolute;top:0;right:0;width:70px;height:70px;background:var(--accent-2);opacity:0.06;border-radius:0 var(--radius-lg) 0 70px;"></div>
+        <div class="backend-platform">Browser · Future Native</div>
+        <div class="backend-name">WebGPU</div>
+        <div class="backend-desc">Run Framm in the browser via Emscripten. WebGPU is also positioned as the future cross-platform GPU standard.</div>
+        <div class="backend-status">
+          <div class="status-dot status-planned"></div>
+          <span style="color:var(--text-3);font-family:var(--font-mono);font-size:11px;">Planned</span>
+        </div>
+      </div>
+
+      <div class="backend-card reveal reveal-delay-5">
+        <div style="position:absolute;top:0;right:0;width:70px;height:70px;background:var(--text-4);opacity:0.1;border-radius:0 var(--radius-lg) 0 70px;"></div>
+        <div class="backend-platform">Embedded · CI · Testing</div>
+        <div class="backend-name">Software</div>
+        <div class="backend-desc">CPU-only rasterizer. No GPU required — perfect for embedded devices, headless CI snapshot testing, and fallback environments.</div>
+        <div class="backend-status">
+          <div class="status-dot status-stable"></div>
+          <span style="color:var(--green);font-family:var(--font-mono);font-size:11px;">Stable</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Metal removal note -->
+    <div class="reveal" style="margin-top:24px;background:rgba(255,68,68,0.05);border:1px solid rgba(255,68,68,0.15);border-radius:var(--radius-lg);padding:20px 24px;display:flex;align-items:flex-start;gap:16px;">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="var(--red)" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;"><circle cx="10" cy="10" r="8"/><line x1="10" y1="6" x2="10" y2="10"/><circle cx="10" cy="14" r="0.5" fill="var(--red)"/></svg>
+      <div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--red);letter-spacing:0.08em;margin-bottom:4px;">METAL REMOVED</div>
+        <div style="font-size:13px;color:var(--text-3);line-height:1.6;">Apple Metal requires enrollment in the Apple Developer Program, proprietary SDK agreements, and is closed-source. This conflicts directly with Framm's MIT license and open-source-first philosophy. macOS support is provided via OpenGL (deprecated but functional), or users may contribute a MoltenVK bridge to enable Vulkan on Apple silicon.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     ROADMAP
+══════════════════════════════════════════════════════════ -->
+<section id="roadmap" class="section">
+  <div class="container">
+    <div class="flex gap-64" style="flex-wrap:wrap;">
+      <div style="flex:1;min-width:280px;">
+        <div class="section-header reveal">
+          <div class="label">Where we are</div>
+          <h2 class="display-lg section-title">Built in public.<br>Moving fast.</h2>
+          <p class="section-sub">Framm is under active development. Every module is tracked, every release is tagged, every breaking change is documented.</p>
+        </div>
+
+        <div class="roadmap-track reveal">
+
+          <div class="roadmap-item">
+            <div class="roadmap-dot done"></div>
+            <div class="roadmap-phase">Alpha — Complete</div>
+            <div class="roadmap-title">Core Runtime</div>
+            <div class="roadmap-items-list">
+              <div class="roadmap-task">
+                <div class="task-check done"><svg viewBox="0 0 10 10" width="8" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="1 5 4 8 9 2"/></svg></div>
+                Scene graph + dirty tracking
+              </div>
+              <div class="roadmap-task">
+                <div class="task-check done"><svg viewBox="0 0 10 10" width="8" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="1 5 4 8 9 2"/></svg></div>
+                Memory pool allocators
+              </div>
+              <div class="roadmap-task">
+                <div class="task-check done"><svg viewBox="0 0 10 10" width="8" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="1 5 4 8 9 2"/></svg></div>
+                Flex + Grid layout engine
+              </div>
+              <div class="roadmap-task">
+                <div class="task-check done"><svg viewBox="0 0 10 10" width="8" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="1 5 4 8 9 2"/></svg></div>
+                OpenGL batch renderer
+              </div>
+              <div class="roadmap-task">
+                <div class="task-check done"><svg viewBox="0 0 10 10" width="8" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="1 5 4 8 9 2"/></svg></div>
+                Event system (mouse, keyboard, touch)
               </div>
             </div>
+          </div>
 
-            <div class="hero-panel reveal reveal-delay" aria-hidden="true">
-              <div class="panel-shell">
-                <div class="panel-header">
-                  <div class="panel-dots">
-                    <span class="dot dot-red"></span>
-                    <span class="dot dot-yellow"></span>
-                    <span class="dot dot-green"></span>
-                  </div>
-                  <span class="panel-title">Editor · Frame</span>
-                  <span class="status-chip">Active development</span>
-                </div>
-                <div class="panel-sidebar">
-                  <div class="sidebar-item active">
-                    <span class="sb-icon">⬡</span>
-                    <span>Layout</span>
-                  </div>
-                  <div class="sidebar-item">
-                    <span class="sb-icon">◈</span>
-                    <span>Components</span>
-                  </div>
-                  <div class="sidebar-item">
-                    <span class="sb-icon">◎</span>
-                    <span>Styling</span>
-                  </div>
-                  <div class="sidebar-item">
-                    <span class="sb-icon">⬡</span>
-                    <span>Render</span>
-                  </div>
-                  <div class="sidebar-item">
-                    <span class="sb-icon">◈</span>
-                    <span>Events</span>
-                  </div>
-                </div>
-                <div class="panel-body">
-                  <div class="panel-grid">
-                    <div class="panel-card pc-tall">
-                      <div class="pc-label">Scene Graph</div>
-                      <div class="pc-lines">
-                        <div class="pc-line" style="width:70%"></div>
-                        <div class="pc-line" style="width:50%"></div>
-                        <div class="pc-line" style="width:85%"></div>
-                        <div class="pc-line" style="width:40%"></div>
-                      </div>
-                    </div>
-                    <div class="panel-card">
-                      <div class="pc-label">Metrics</div>
-                      <div class="pc-metric">1.9<small>ms</small></div>
-                    </div>
-                  </div>
-                  <div class="panel-row">
-                    <div class="panel-tile">
-                      <div class="pt-bar" style="--w:88%"></div>
-                      <span>Render</span>
-                    </div>
-                    <div class="panel-tile">
-                      <div class="pt-bar" style="--w:72%"></div>
-                      <span>Layout</span>
-                    </div>
-                    <div class="panel-tile">
-                      <div class="pt-bar" style="--w:55%"></div>
-                      <span>Style</span>
-                    </div>
-                  </div>
-                </div>
+          <div class="roadmap-item">
+            <div class="roadmap-dot active"></div>
+            <div class="roadmap-phase">Beta — In Progress</div>
+            <div class="roadmap-title">Widgets + Style System</div>
+            <div class="roadmap-items-list">
+              <div class="roadmap-task">
+                <div class="task-check done"><svg viewBox="0 0 10 10" width="8" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="1 5 4 8 9 2"/></svg></div>
+                Core widget library (button, input, select)
+              </div>
+              <div class="roadmap-task">
+                <div class="task-check done"><svg viewBox="0 0 10 10" width="8" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="1 5 4 8 9 2"/></svg></div>
+                Style cascade + theme tokens
+              </div>
+              <div class="roadmap-task">
+                <div class="task-check"></div>
+                Dark/Light/System theme switching
+              </div>
+              <div class="roadmap-task">
+                <div class="task-check"></div>
+                Container widgets (modal, drawer, tabs)
+              </div>
+              <div class="roadmap-task">
+                <div class="task-check"></div>
+                Text engine (HarfBuzz + BiDi)
               </div>
             </div>
           </div>
 
-          <div class="scroll-hint">
-            <span>Scroll to explore</span>
-            <div class="scroll-arrow">↓</div>
+          <div class="roadmap-item">
+            <div class="roadmap-dot soon"></div>
+            <div class="roadmap-phase">v1.0 — Planned</div>
+            <div class="roadmap-title">Full Feature Parity</div>
+            <div class="roadmap-items-list">
+              <div class="roadmap-task"><div class="task-check"></div>Charts module (all chart types)</div>
+              <div class="roadmap-task"><div class="task-check"></div>i18n + RTL + emoji/flags</div>
+              <div class="roadmap-task"><div class="task-check"></div>Accessibility (screen reader API)</div>
+              <div class="roadmap-task"><div class="task-check"></div>Plugin system</div>
+              <div class="roadmap-task"><div class="task-check"></div>Full documentation</div>
+            </div>
           </div>
-        </section>
 
-        <!-- ═══════════════════════ MARQUEE ═══════════════════════ -->
-        <div class="marquee-section">
-          <div class="marquee-track">
-            <div class="marquee-content">
-              <span>High Performance</span><span class="sep">·</span>
-              <span>Native C++</span><span class="sep">·</span>
-              <span>Immediate Mode</span><span class="sep">·</span>
-              <span>Structured Layout</span><span class="sep">·</span>
-              <span>GPU Efficient</span><span class="sep">·</span>
-              <span>Developer First</span><span class="sep">·</span>
-              <span>Modular Architecture</span><span class="sep">·</span>
-              <span>Minimal Footprint</span><span class="sep">·</span>
-              <span>High Performance</span><span class="sep">·</span>
-              <span>Native C++</span><span class="sep">·</span>
-              <span>Immediate Mode</span><span class="sep">·</span>
-              <span>Structured Layout</span><span class="sep">·</span>
-              <span>GPU Efficient</span><span class="sep">·</span>
-              <span>Developer First</span><span class="sep">·</span>
-              <span>Modular Architecture</span><span class="sep">·</span>
-              <span>Minimal Footprint</span><span class="sep">·</span>
+          <div class="roadmap-item">
+            <div class="roadmap-dot soon"></div>
+            <div class="roadmap-phase">Future</div>
+            <div class="roadmap-title">Beyond v1.0</div>
+            <div class="roadmap-items-list">
+              <div class="roadmap-task"><div class="task-check"></div>Vulkan backend (stable)</div>
+              <div class="roadmap-task"><div class="task-check"></div>WebGPU backend</div>
+              <div class="roadmap-task"><div class="task-check"></div>Python + Rust bindings</div>
+              <div class="roadmap-task"><div class="task-check"></div>Visual designer tool</div>
+              <div class="roadmap-task"><div class="task-check"></div>Hot reload in dev mode</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Side panel -->
+      <div style="width:320px;flex-shrink:0;" class="reveal reveal-delay-2">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:28px;margin-bottom:16px;">
+          <div class="label-dim" style="margin-bottom:14px;">Current Version</div>
+          <div style="font-family:var(--font-display);font-size:40px;font-weight:800;letter-spacing:-0.04em;color:var(--text);">v0.2</div>
+          <div style="font-family:var(--font-mono);font-size:12px;color:var(--text-3);margin-top:4px;">Alpha · Core Runtime</div>
+          <hr class="divider" style="margin:20px 0;">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;justify-content:space-between;font-size:13px;">
+              <span style="color:var(--text-3);font-family:var(--font-mono);">License</span>
+              <span style="color:var(--accent);font-family:var(--font-mono);">MIT</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;">
+              <span style="color:var(--text-3);font-family:var(--font-mono);">Language</span>
+              <span style="color:var(--text);font-family:var(--font-mono);">C++17</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;">
+              <span style="color:var(--text-3);font-family:var(--font-mono);">Build</span>
+              <span style="color:var(--text);font-family:var(--font-mono);">CMake 3.20+</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;">
+              <span style="color:var(--text-3);font-family:var(--font-mono);">Metal</span>
+              <span style="color:var(--red);font-family:var(--font-mono);">Removed</span>
             </div>
           </div>
         </div>
 
-        <!-- ═══════════════════════ PROBLEM ═══════════════════════ -->
-        <section class="section section-split" id="problem">
-          <div class="section-tag reveal">
-            <span>01</span>
-            <span>Problem</span>
-          </div>
-          <div class="section-header reveal">
-            <p class="eyebrow">What is broken today?</p>
-            <h2>UI development is fragmented between fast but shallow tools and powerful but heavy frameworks.</h2>
-          </div>
-
-          <div class="split-layout reveal">
-            <div class="split-text">
-              <p class="section-text">
-                Many existing UI solutions fall into two categories: immediate-mode libraries that are simple, fast, and easy to integrate, and comprehensive frameworks that include full-featured layout systems and styling engines. Immediate-mode tools are beloved for their ability to render interfaces quickly and support rapid iteration, but they often lack the structural depth required for large-scale applications.
-              </p>
-              <p class="section-text">
-                Developers frequently find themselves layering additional abstractions just to achieve consistent spacing, reusable layouts, or predictable interface behavior. These compensations accumulate into technical debt that undermines the very simplicity that made the tool appealing in the first place.
-              </p>
-              <p class="section-text">
-                On the other side, comprehensive frameworks deliver a lot of capability, but they also introduce significant overhead in complexity, build size, and architectural constraints. These frameworks can become rigid, verbose, and difficult to optimize, which undermines the responsiveness that many native tools require.
-              </p>
-              <p class="section-text">
-                The net effect is a fragmented ecosystem where developers are forced to choose between speed and structure, simplicity and capability. There is no middle path that honors both without compromise. Framm exists to fill that gap.
-              </p>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:28px;">
+          <div class="label-dim" style="margin-bottom:14px;">Platforms</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;">
+              <div class="status-dot status-stable"></div>
+              <span style="color:var(--text-2);">Linux (X11 + Wayland)</span>
             </div>
-            <div class="split-visual">
-              <div class="comparison-card">
-                <div class="comparison-item ci-bad">
-                  <div class="ci-header">
-                    <span class="ci-label">Immediate-mode libs</span>
-                    <span class="ci-badge ci-badge-warn">Shallow</span>
-                  </div>
-                  <ul class="ci-list">
-                    <li><span class="check check-yes">✓</span> Fast to integrate</li>
-                    <li><span class="check check-yes">✓</span> Low overhead</li>
-                    <li><span class="check check-no">✗</span> No structured layout</li>
-                    <li><span class="check check-no">✗</span> Poor scalability</li>
-                    <li><span class="check check-no">✗</span> Limited styling</li>
-                  </ul>
-                </div>
-                <div class="comparison-item ci-bad">
-                  <div class="ci-header">
-                    <span class="ci-label">Heavy frameworks</span>
-                    <span class="ci-badge ci-badge-warn">Constrained</span>
-                  </div>
-                  <ul class="ci-list">
-                    <li><span class="check check-yes">✓</span> Full feature set</li>
-                    <li><span class="check check-yes">✓</span> Rich layout system</li>
-                    <li><span class="check check-no">✗</span> Large build size</li>
-                    <li><span class="check check-no">✗</span> Performance overhead</li>
-                    <li><span class="check check-no">✗</span> Rigid architecture</li>
-                  </ul>
-                </div>
-                <div class="comparison-item ci-good">
-                  <div class="ci-header">
-                    <span class="ci-label">Framm</span>
-                    <span class="ci-badge ci-badge-good">Balanced</span>
-                  </div>
-                  <ul class="ci-list">
-                    <li><span class="check check-yes">✓</span> Intuitive API</li>
-                    <li><span class="check check-yes">✓</span> Structured layout</li>
-                    <li><span class="check check-yes">✓</span> Minimal footprint</li>
-                    <li><span class="check check-yes">✓</span> GPU efficiency</li>
-                    <li><span class="check check-yes">✓</span> Modular architecture</li>
-                  </ul>
-                </div>
-              </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;">
+              <div class="status-dot status-stable"></div>
+              <span style="color:var(--text-2);">Windows 10/11</span>
             </div>
-          </div>
-        </section>
-
-        <!-- ═══════════════════════ APPROACH ═══════════════════════ -->
-        <section class="section" id="approach">
-          <div class="section-tag reveal">
-            <span>02</span>
-            <span>Approach</span>
-          </div>
-          <div class="section-header reveal">
-            <p class="eyebrow">How Framm solves it</p>
-            <h2>Combining immediacy with structure to deliver a better foundation for native software.</h2>
-          </div>
-
-          <div class="approach-grid reveal">
-            <div class="approach-text">
-              <p class="section-text">
-                Framm is designed to address the gap between lightweight UI libraries and heavyweight frameworks. It provides an interface that feels immediate and intuitive, while maintaining a structured layout and rendering system underneath. This hybrid approach allows developers to write clean, concise code without losing the ability to build complex, adaptive interfaces that scale with the application.
-              </p>
-              <p class="section-text">
-                The engine is not intended to replicate existing tools. Instead, it aims to redefine the balance between usability and capability by offering a consistent, developer-friendly surface on top of a carefully engineered architecture.
-              </p>
-              <p class="section-text">
-                Framm is built to make modern UI development feel natural, while also preserving the performance and transparency required for professional native software. The goal is not to abstract away complexity but to provide the right primitives so complexity never becomes overwhelming.
-              </p>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;">
+              <div class="status-dot status-beta"></div>
+              <span style="color:var(--text-2);">Android</span>
             </div>
-
-            <div class="approach-steps">
-              <div class="step-card reveal">
-                <div class="step-num">01</div>
-                <div class="step-body">
-                  <h3>Immediate-mode surface</h3>
-                  <p>Developers interact with Framm through an API that feels direct and low-ceremony, enabling rapid prototyping and tight iteration loops without boilerplate.</p>
-                </div>
-              </div>
-              <div class="step-card reveal">
-                <div class="step-num">02</div>
-                <div class="step-body">
-                  <h3>Structured internal layout</h3>
-                  <p>Beneath the surface, a full layout engine handles measurement, constraint resolution, and adaptive sizing — giving you the power of a full framework without its verbosity.</p>
-                </div>
-              </div>
-              <div class="step-card reveal">
-                <div class="step-num">03</div>
-                <div class="step-body">
-                  <h3>Optimized render pipeline</h3>
-                  <p>A batched, GPU-aware renderer processes all UI elements as a unified scene, minimizing draw calls and maximizing frame rate stability across complex layouts.</p>
-                </div>
-              </div>
-              <div class="step-card reveal">
-                <div class="step-num">04</div>
-                <div class="step-body">
-                  <h3>Modular, composable design</h3>
-                  <p>Every subsystem is independently evolvable. Adopt only what you need, extend what you want, and build plugins without touching the core runtime.</p>
-                </div>
-              </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;">
+              <div class="status-dot status-planned"></div>
+              <span style="color:var(--text-2);">Browser (WASM)</span>
             </div>
-          </div>
-        </section>
-
-        <!-- ═══════════════════════ PERFORMANCE ═══════════════════════ -->
-        <section class="section section-dark" id="performance">
-          <div class="section-tag reveal">
-            <span>03</span>
-            <span>Performance</span>
-          </div>
-          <div class="section-header reveal">
-            <p class="eyebrow">Built for speed</p>
-            <h2>Every part of Framm is engineered with efficiency as a first-class concern.</h2>
-          </div>
-
-          <div class="perf-layout reveal">
-            <div class="perf-text">
-              <p class="section-text">
-                Framm's foundation is rooted in modern C++ practices that emphasize memory control, minimal overhead, and consistent frame rates. The engine is designed to minimize allocations, reduce unnecessary work, and keep render pipelines efficient. Developers can focus on building interfaces without needing to make low-level performance trade-offs in their application code.
-              </p>
-              <p class="section-text">
-                Rendering is handled through an optimized pipeline that focuses on batching and minimizing draw calls. By treating UI elements as part of a cohesive scene rather than isolated components, Framm maximizes GPU efficiency and avoids the common bottlenecks that slow down complex layouts.
-              </p>
-              <p class="section-text">
-                Memory management follows a pool-based allocation strategy designed for predictable performance. Rather than relying on general-purpose heap allocations that can fragment over time, Framm uses dedicated pools for UI nodes, layout data, and render primitives. This keeps cache locality high and allocation overhead minimal, even in interfaces that update every frame.
-              </p>
-            </div>
-
-            <div class="perf-metrics">
-              <div class="metric-block reveal">
-                <div class="metric-top">
-                  <span class="metric-label">Render latency</span>
-                  <strong class="metric-value">1.9ms</strong>
-                </div>
-                <div class="metric-bar">
-                  <div class="metric-fill" style="--pct: 92%"></div>
-                </div>
-                <p class="metric-note">Average across complex scene with 800+ UI nodes</p>
-              </div>
-              <div class="metric-block reveal">
-                <div class="metric-top">
-                  <span class="metric-label">Frame stability</span>
-                  <strong class="metric-value">99.8%</strong>
-                </div>
-                <div class="metric-bar">
-                  <div class="metric-fill" style="--pct: 99.8%"></div>
-                </div>
-                <p class="metric-note">Consistent throughput at 60fps under sustained load</p>
-              </div>
-              <div class="metric-block reveal">
-                <div class="metric-top">
-                  <span class="metric-label">Runtime footprint</span>
-                  <strong class="metric-value">4.1MB</strong>
-                </div>
-                <div class="metric-bar">
-                  <div class="metric-fill" style="--pct: 42%"></div>
-                </div>
-                <p class="metric-note">Stripped release binary including renderer and layout engine</p>
-              </div>
-              <div class="metric-block reveal">
-                <div class="metric-top">
-                  <span class="metric-label">Draw call reduction</span>
-                  <strong class="metric-value">~68%</strong>
-                </div>
-                <div class="metric-bar">
-                  <div class="metric-fill" style="--pct: 68%"></div>
-                </div>
-                <p class="metric-note">Compared to naive per-element draw approaches</p>
-              </div>
-              <div class="metric-block reveal">
-                <div class="metric-top">
-                  <span class="metric-label">Cold startup time</span>
-                  <strong class="metric-value">12ms</strong>
-                </div>
-                <div class="metric-bar">
-                  <div class="metric-fill" style="--pct: 88%"></div>
-                </div>
-                <p class="metric-note">From engine init to first rendered frame</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="perf-cards reveal">
-            <div class="perf-card">
-              <div class="pc-icon">⬡</div>
-              <h3>Memory pools</h3>
-              <p>Pool-based allocators keep heap fragmentation low and cache efficiency high. UI nodes, primitives, and layout data live in dedicated, reusable memory regions.</p>
-            </div>
-            <div class="perf-card">
-              <div class="pc-icon">◎</div>
-              <h3>Batch renderer</h3>
-              <p>UI elements are collected into batches by material and depth before submission to the GPU. This eliminates redundant state changes and maximizes fill rate utilization.</p>
-            </div>
-            <div class="perf-card">
-              <div class="pc-icon">◈</div>
-              <h3>Dirty tracking</h3>
-              <p>Only changed regions of the scene graph are re-evaluated. Static sub-trees are cached and skipped during both layout and render passes, saving significant CPU time.</p>
-            </div>
-            <div class="perf-card">
-              <div class="pc-icon">▲</div>
-              <h3>Zero-cost layout</h3>
-              <p>The layout engine operates in a single forward pass for most cases. Complex constraint graphs are resolved incrementally, never blocking the render thread.</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- ═══════════════════════ ARCHITECTURE ═══════════════════════ -->
-        <section class="section" id="architecture">
-          <div class="section-tag reveal">
-            <span>04</span>
-            <span>Architecture</span>
-          </div>
-          <div class="section-header reveal">
-            <p class="eyebrow">System design</p>
-            <h2>A layered, modular engine built to evolve without breaking what works.</h2>
-          </div>
-
-          <div class="arch-layout reveal">
-            <div class="arch-diagram">
-              <div class="arch-layer al-top">
-                <span class="al-label">Application Layer</span>
-                <div class="al-modules">
-                  <div class="al-mod">Your App</div>
-                  <div class="al-mod">Plugin System</div>
-                </div>
-              </div>
-              <div class="arch-arrow">↓</div>
-              <div class="arch-layer al-mid">
-                <span class="al-label">Framm API</span>
-                <div class="al-modules">
-                  <div class="al-mod">Layout Engine</div>
-                  <div class="al-mod">Style System</div>
-                  <div class="al-mod">Event Manager</div>
-                  <div class="al-mod">Component API</div>
-                </div>
-              </div>
-              <div class="arch-arrow">↓</div>
-              <div class="arch-layer al-low">
-                <span class="al-label">Runtime Core</span>
-                <div class="al-modules">
-                  <div class="al-mod">Scene Graph</div>
-                  <div class="al-mod">Memory Pools</div>
-                  <div class="al-mod">Dirty Tracker</div>
-                </div>
-              </div>
-              <div class="arch-arrow">↓</div>
-              <div class="arch-layer al-bottom">
-                <span class="al-label">Render Backend</span>
-                <div class="al-modules">
-                  <div class="al-mod">Batch Renderer</div>
-                  <div class="al-mod">GPU Commands</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="arch-text">
-              <p class="section-text">
-                Framm is organized into four distinct layers, each with a clearly defined responsibility. This separation ensures that changes to one layer do not cascade unpredictably into others, making the engine easier to reason about, test, and extend over time.
-              </p>
-              <p class="section-text">
-                The application layer is where your code lives. It communicates with Framm exclusively through the public API, which provides layout, styling, event handling, and component management. This layer is intentionally decoupled from internal details, so your code remains stable as the engine evolves.
-              </p>
-              <p class="section-text">
-                The runtime core manages the scene graph, memory allocation, and change detection. It is the most performance-critical part of the system. The render backend sits below the core and is deliberately swappable — enabling support for different graphics APIs or custom rendering pipelines without touching anything above.
-              </p>
-
-              <div class="arch-pillars">
-                <div class="arch-pillar">
-                  <strong>Separation of concerns</strong>
-                  <p>Each subsystem owns its domain. No layer reaches across its boundary into another's internals.</p>
-                </div>
-                <div class="arch-pillar">
-                  <strong>Swappable backends</strong>
-                  <p>The rendering layer is an abstraction. Future backends for Vulkan, Metal, or WebGPU can be added without rewriting layout or style logic.</p>
-                </div>
-                <div class="arch-pillar">
-                  <strong>Incremental adoption</strong>
-                  <p>You can use the layout engine without the style system, or the style system without the component API. Take what you need.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ═══════════════════════ LAYOUT ═══════════════════════ -->
-        <section class="section section-dark" id="system">
-          <div class="section-tag reveal">
-            <span>05</span>
-            <span>Layout</span>
-          </div>
-          <div class="section-header reveal">
-            <p class="eyebrow">Layout and styling</p>
-            <h2>Structured layout with a lightweight, expressive styling system.</h2>
-          </div>
-
-          <div class="layout-grid reveal">
-            <div class="layout-text">
-              <p class="section-text">
-                Framm introduces a layout system that remains intuitive while providing greater flexibility than simple stacking models. The system is designed to adapt cleanly to changing content and screen sizes, enabling developers to build interfaces that feel stable and predictable without manual positioning or constant recalculation.
-              </p>
-              <p class="section-text">
-                Styling is handled through a consistent, minimal system that supports color schemes, spacing, typography, and component-level customization. It avoids the excess of larger theme engines by offering just enough structure to achieve polished visuals while staying lightweight and easy to reason about.
-              </p>
-              <p class="section-text">
-                The layout engine performs a single-pass measurement and placement cycle for most interface configurations. Complex adaptive layouts use a constraint-resolution step that is isolated from the frame render, ensuring that even deeply nested structures do not introduce frame time spikes.
-              </p>
-            </div>
-
-            <div class="layout-demo">
-              <div class="ld-shell">
-                <div class="ld-header">
-                  <div class="ld-dots"><span></span><span></span><span></span></div>
-                  <span>Layout preview</span>
-                </div>
-                <div class="ld-body">
-                  <div class="ld-col">
-                    <div class="ld-block ld-full">Column root</div>
-                    <div class="ld-row">
-                      <div class="ld-block ld-half">Row A</div>
-                      <div class="ld-block ld-half">Row B</div>
-                    </div>
-                    <div class="ld-row">
-                      <div class="ld-block ld-third">Grid 1</div>
-                      <div class="ld-block ld-third">Grid 2</div>
-                      <div class="ld-block ld-third">Grid 3</div>
-                    </div>
-                    <div class="ld-block ld-full ld-tall">Flex container</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="style-features reveal">
-            <div class="sf-item">
-              <h3>Color system</h3>
-              <p>Define semantic tokens for foreground, background, border, and accent colors. Apply consistently across components through a single style object.</p>
-            </div>
-            <div class="sf-item">
-              <h3>Spacing scale</h3>
-              <p>A configurable spacing scale drives all margins, paddings, and gaps. Consistent density emerges automatically without per-component overrides.</p>
-            </div>
-            <div class="sf-item">
-              <h3>Typography</h3>
-              <p>Font families, sizes, weights, and line heights are declared once at the engine level and applied through named text styles across the interface.</p>
-            </div>
-            <div class="sf-item">
-              <h3>Component tokens</h3>
-              <p>Individual components can override global tokens for scoped customization, without polluting the shared style context.</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- ═══════════════════════ DEVELOPER EXPERIENCE ═══════════════════════ -->
-        <section class="section" id="experience">
-          <div class="section-tag reveal">
-            <span>06</span>
-            <span>DX</span>
-          </div>
-          <div class="section-header reveal">
-            <p class="eyebrow">Developer experience</p>
-            <h2>Clean APIs, clear structure, and a focused architecture you can grow with.</h2>
-          </div>
-
-          <div class="dx-grid reveal">
-            <div class="dx-item">
-              <div class="dx-icon">◉</div>
-              <h3>Expressive API</h3>
-              <p>The API is designed to describe interfaces in a natural way. Method chains read like a layout specification, not a sequence of imperative commands.</p>
-            </div>
-            <div class="dx-item">
-              <div class="dx-icon">⬡</div>
-              <h3>Composable components</h3>
-              <p>Layouts are built from composable primitives — Column, Row, Stack, and Grid — that can be nested and extended without hitting abstraction ceilings.</p>
-            </div>
-            <div class="dx-item">
-              <div class="dx-icon">◈</div>
-              <h3>Predictable behavior</h3>
-              <p>Consistent, well-documented behavior at every layer reduces surprise. The same layout rules apply whether you are building a simple panel or a complex editor.</p>
-            </div>
-            <div class="dx-item">
-              <div class="dx-icon">▲</div>
-              <h3>Incremental adoption</h3>
-              <p>Framm's modular design lets teams introduce the engine gradually into an existing native application rather than requiring a full rewrite from the start.</p>
-            </div>
-            <div class="dx-item">
-              <div class="dx-icon">◎</div>
-              <h3>Plugin system</h3>
-              <p>Extend Framm's capabilities through a structured plugin interface. Custom components, renderers, and layout algorithms can be integrated without forking the core.</p>
-            </div>
-            <div class="dx-item">
-              <div class="dx-icon">⬡</div>
-              <h3>Low cognitive load</h3>
-              <p>By keeping the API surface focused and the architecture transparent, Framm reduces the mental overhead required to build and maintain complex native interfaces.</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- ═══════════════════════ USE CASES ═══════════════════════ -->
-        <section class="section section-dark" id="usecases">
-          <div class="section-tag reveal">
-            <span>07</span>
-            <span>Use Cases</span>
-          </div>
-          <div class="section-header reveal">
-            <p class="eyebrow">Where Framm excels</p>
-            <h2>Purpose-built for scenarios where performance and clarity both matter.</h2>
-          </div>
-
-          <div class="use-grid reveal">
-            <div class="use-card use-featured">
-              <div class="use-icon">⬡</div>
-              <h3>Developer tools</h3>
-              <p>Profilers, debuggers, inspectors, and editors benefit from Framm's combination of low latency rendering, structured layout, and straightforward composability. Build internal tooling that feels as polished as the products it supports.</p>
-            </div>
-            <div class="use-card">
-              <div class="use-icon">◎</div>
-              <h3>Real-time overlays</h3>
-              <p>Frame rate counters, diagnostic overlays, and in-engine editors require consistent sub-millisecond rendering. Framm's batch pipeline handles these without stealing time from your main application.</p>
-            </div>
-            <div class="use-card">
-              <div class="use-icon">◈</div>
-              <h3>Control panels</h3>
-              <p>Industrial, scientific, and engineering control surfaces that demand dense, precise layouts with no visual artifacts. Framm's layout engine handles complex constraint relationships with predictable output.</p>
-            </div>
-            <div class="use-card">
-              <div class="use-icon">▲</div>
-              <h3>Desktop applications</h3>
-              <p>Native desktop software that needs a modern interface without the bloat of cross-platform web technology stacks. Framm provides a genuinely native foundation at a fraction of the runtime cost.</p>
-            </div>
-            <div class="use-card">
-              <div class="use-icon">⬡</div>
-              <h3>Game editors</h3>
-              <p>Scene editors, asset pipelines, and world builders running in-process alongside game engines. Framm's immediate-feel API integrates cleanly into existing native render loops.</p>
-            </div>
-            <div class="use-card">
-              <div class="use-icon">◎</div>
-              <h3>Embedded interfaces</h3>
-              <p>Resource-constrained environments where memory footprint and startup time matter. The 4.1MB runtime and pool-based allocator make Framm viable in scenarios where heavier toolkits are simply not an option.</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- ═══════════════════════ CODE ═══════════════════════ -->
-        <section class="section" id="code">
-          <div class="section-tag reveal">
-            <span>08</span>
-            <span>Code</span>
-          </div>
-          <div class="section-header reveal">
-            <p class="eyebrow">Code preview</p>
-            <h2>Framm is expressive, concise, and easy to reason about.</h2>
-            <p class="section-text">
-              The examples below demonstrate how native UIs can be declared with a clean, composable API that stays readable even as interfaces grow in complexity. Framm code reads like a layout description, not a sequence of imperative commands.
-            </p>
-          </div>
-
-          <div class="code-tabs reveal" id="codeTabs">
-            <div class="tab-nav">
-              <button class="tab-btn active" data-tab="basic">Basic window</button>
-              <button class="tab-btn" data-tab="complex">Dashboard layout</button>
-              <button class="tab-btn" data-tab="style">Styling</button>
-              <button class="tab-btn" data-tab="events">Event handling</button>
-            </div>
-
-            <div class="tab-content active" data-content="basic">
-              <pre class="code-block"><code><span class="kw">#include</span> <span class="str">&lt;framm/core.h&gt;</span>
-
-<span class="kw">using namespace</span> framm;
-
-<span class="kw">int</span> main() {
-  <span class="kw">auto</span> app = Application::Create(<span class="str">"Studio"</span>);
-  <span class="kw">auto</span> window = app.CreateWindow({<span class="str">"Framm"</span>, <span class="num">1280</span>, <span class="num">780</span>});
-
-  window->Layout(
-    Column()
-      .Spacing(<span class="num">16</span>)
-      .Add(Text(<span class="str">"Dashboard"</span>))
-      .Add(Row()
-        .Add(Button(<span class="str">"Build"</span>))
-        .Add(Button(<span class="str">"Inspect"</span>)))
-  );
-
-  <span class="kw">return</span> app.Run();
-}</code></pre>
-            </div>
-
-            <div class="tab-content" data-content="complex">
-              <pre class="code-block"><code><span class="kw">#include</span> <span class="str">&lt;framm/core.h&gt;</span>
-<span class="kw">#include</span> <span class="str">&lt;framm/widgets.h&gt;</span>
-
-<span class="kw">using namespace</span> framm;
-
-<span class="kw">auto</span> BuildDashboard() {
-  <span class="kw">return</span>
-    Column()
-      .Fill()
-      .Spacing(<span class="num">0</span>)
-      .Add(Topbar()
-        .Add(Label(<span class="str">"Framm Studio"</span>).Bold())
-        .Add(Spacer())
-        .Add(Badge(<span class="str">"v0.4.2"</span>)))
-      .Add(Row()
-        .Fill()
-        .Add(Sidebar()
-          .Width(<span class="num">240</span>)
-          .Add(NavItem(<span class="str">"Inspector"</span>))
-          .Add(NavItem(<span class="str">"Scene"</span>))
-          .Add(NavItem(<span class="str">"Settings"</span>)))
-        .Add(ContentArea()
-          .Padding(<span class="num">24</span>)
-          .Add(MetricGrid()
-            .Add(MetricCard(<span class="str">"Latency"</span>, <span class="str">"1.9ms"</span>))
-            .Add(MetricCard(<span class="str">"Stability"</span>, <span class="str">"99.8%"</span>))
-            .Add(MetricCard(<span class="str">"Footprint"</span>, <span class="str">"4.1MB"</span>)))));
-}
-
-<span class="kw">int</span> main() {
-  <span class="kw">auto</span> app = Application::Create(<span class="str">"Studio"</span>);
-  <span class="kw">auto</span> window = app.CreateWindow({<span class="str">"Dashboard"</span>, <span class="num">1440</span>, <span class="num">900</span>});
-  window->Layout(BuildDashboard());
-  <span class="kw">return</span> app.Run();
-}</code></pre>
-            </div>
-
-            <div class="tab-content" data-content="style">
-              <pre class="code-block"><code><span class="kw">#include</span> <span class="str">&lt;framm/style.h&gt;</span>
-
-<span class="kw">using namespace</span> framm;
-
-<span class="kw">auto</span> theme = StyleSheet{
-  .colors = {
-    .background = Color::Hex(<span class="str">"#0d0d0d"</span>),
-    .surface    = Color::Hex(<span class="str">"#161616"</span>),
-    .accent     = Color::Hex(<span class="str">"#c8ff00"</span>),
-    .text       = Color::Hex(<span class="str">"#e8e8e8"</span>),
-    .muted      = Color::Hex(<span class="str">"#555"</span>),
-  },
-  .spacing = SpacingScale::Custom({ <span class="num">4</span>, <span class="num">8</span>, <span class="num">12</span>, <span class="num">16</span>, <span class="num">24</span>, <span class="num">32</span>, <span class="num">48</span> }),
-  .radius  = <span class="num">6.0f</span>,
-  .font    = Font::Load(<span class="str">"JetBrainsMono"</span>, <span class="num">14</span>),
-};
-
-<span class="kw">int</span> main() {
-  <span class="kw">auto</span> app = Application::Create(<span class="str">"Styled App"</span>);
-  app.SetStyleSheet(theme);
-  <span class="kw">auto</span> w = app.CreateWindow({<span class="str">"Framm"</span>, <span class="num">1280</span>, <span class="num">780</span>});
-  w->Layout(Column().Add(Text(<span class="str">"Styled interface"</span>)));
-  <span class="kw">return</span> app.Run();
-}</code></pre>
-            </div>
-
-            <div class="tab-content" data-content="events">
-              <pre class="code-block"><code><span class="kw">#include</span> <span class="str">&lt;framm/core.h&gt;</span>
-<span class="kw">#include</span> <span class="str">&lt;framm/events.h&gt;</span>
-
-<span class="kw">using namespace</span> framm;
-
-<span class="kw">int</span> main() {
-  <span class="kw">auto</span> app = Application::Create(<span class="str">"Events Demo"</span>);
-  <span class="kw">auto</span> w   = app.CreateWindow({<span class="str">"Framm"</span>, <span class="num">1280</span>, <span class="num">780</span>});
-
-  <span class="kw">int</span> count = <span class="num">0</span>;
-
-  w->Layout(
-    Column()
-      .Spacing(<span class="num">16</span>)
-      .Add(
-        Button(<span class="str">"Click me"</span>)
-          .OnClick([&amp;]() {
-            count++;
-            <span class="kw">return</span> UpdateState([&amp;](Layout&amp; l) {
-              l.Find(<span class="str">"counter"</span>).SetText(
-                <span class="str">"Count: "</span> + std::to_string(count));
-            });
-          }))
-      .Add(Text(<span class="str">"Count: 0"</span>).Id(<span class="str">"counter"</span>))
-  );
-
-  <span class="kw">return</span> app.Run();
-}</code></pre>
-            </div>
-          </div>
-        </section>
-
-        <!-- ═══════════════════════ SHOWCASE ═══════════════════════ -->
-        <section class="section section-dark" id="showcase">
-          <div class="section-tag reveal">
-            <span>09</span>
-            <span>Showcase</span>
-          </div>
-          <div class="section-header reveal">
-            <p class="eyebrow">Interface showcase</p>
-            <h2>What Framm-powered interfaces look like in practice.</h2>
-            <p class="section-text">Framm's visual language communicates restraint, precision, and structured depth. No excess. No noise. Interfaces that hold up under inspection.</p>
-          </div>
-
-          <div class="showcase-grid reveal">
-            <div class="profile-card">
-              <div class="profile-head">
-                <span>Inspector</span>
-                <span class="status-chip">Live</span>
-              </div>
-              <div class="profile-body">
-                <div class="prop-row"><span class="prop-key">width</span><span class="prop-val">480px</span></div>
-                <div class="prop-row"><span class="prop-key">height</span><span class="prop-val">auto</span></div>
-                <div class="prop-row"><span class="prop-key">padding</span><span class="prop-val">16px 24px</span></div>
-                <div class="prop-row"><span class="prop-key">gap</span><span class="prop-val">12px</span></div>
-                <div class="prop-row"><span class="prop-key">color</span><span class="prop-val prop-color"><span class="color-dot" style="background:#c8ff00"></span>#c8ff00</span></div>
-              </div>
-            </div>
-
-            <div class="profile-card profile-card-wide">
-              <div class="profile-head">
-                <span>Dashboard</span>
-                <span class="status-chip chip-stable">Stable</span>
-              </div>
-              <div class="profile-grid">
-                <div class="metric-card">
-                  <span>Latency</span>
-                  <strong>1.9ms</strong>
-                  <div class="mc-bar"><div style="width:88%"></div></div>
-                </div>
-                <div class="metric-card">
-                  <span>Draw calls</span>
-                  <strong>122</strong>
-                  <div class="mc-bar"><div style="width:61%"></div></div>
-                </div>
-                <div class="metric-card">
-                  <span>Nodes</span>
-                  <strong>847</strong>
-                  <div class="mc-bar"><div style="width:74%"></div></div>
-                </div>
-                <div class="metric-card">
-                  <span>FPS</span>
-                  <strong>60.0</strong>
-                  <div class="mc-bar"><div style="width:100%"></div></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="profile-card">
-              <div class="profile-head">
-                <span>Control panel</span>
-                <span class="status-chip chip-preview">Preview</span>
-              </div>
-              <div class="profile-body">
-                <div class="cp-toggle-row">
-                  <span>Vsync</span>
-                  <div class="cp-toggle active"></div>
-                </div>
-                <div class="cp-toggle-row">
-                  <span>Dirty tracking</span>
-                  <div class="cp-toggle active"></div>
-                </div>
-                <div class="cp-toggle-row">
-                  <span>Batch renderer</span>
-                  <div class="cp-toggle active"></div>
-                </div>
-                <div class="cp-toggle-row">
-                  <span>Debug overlay</span>
-                  <div class="cp-toggle"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="profile-card profile-card-wide">
-              <div class="profile-head">
-                <span>Scene graph</span>
-                <span class="status-chip">Active</span>
-              </div>
-              <div class="scene-tree">
-                <div class="tree-node tn-root">▼ Application</div>
-                <div class="tree-node tn-1">▼ Window</div>
-                <div class="tree-node tn-2">▼ Column</div>
-                <div class="tree-node tn-3">  ▼ Topbar</div>
-                <div class="tree-node tn-4">    Text "Dashboard"</div>
-                <div class="tree-node tn-4">    Badge "v0.4"</div>
-                <div class="tree-node tn-3">  ▼ Row</div>
-                <div class="tree-node tn-4">    Sidebar</div>
-                <div class="tree-node tn-4 tn-active">    ContentArea ●</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ═══════════════════════ ROADMAP ═══════════════════════ -->
-        <section class="section" id="roadmap">
-          <div class="section-tag reveal">
-            <span>10</span>
-            <span>Roadmap</span>
-          </div>
-          <div class="section-header reveal">
-            <p class="eyebrow">Development roadmap</p>
-            <h2>Where Framm is headed and what is being built right now.</h2>
-          </div>
-
-          <div class="roadmap-timeline reveal">
-            <div class="rm-item rm-done">
-              <div class="rm-marker"></div>
-              <div class="rm-content">
-                <div class="rm-phase">Alpha · Complete</div>
-                <h3>Core runtime and layout engine</h3>
-                <p>Scene graph, memory pool system, basic layout primitives (Column, Row, Stack), and the initial render pipeline. Internal testing and API stabilization.</p>
-              </div>
-            </div>
-            <div class="rm-item rm-active">
-              <div class="rm-marker rm-marker-active"></div>
-              <div class="rm-content">
-                <div class="rm-phase">Beta · In progress</div>
-                <h3>Style system and component library</h3>
-                <p>Color tokens, spacing scale, typography, and a set of production-ready widgets including Button, Text, Panel, Grid, and Topbar. Public API surface lock.</p>
-              </div>
-            </div>
-            <div class="rm-item">
-              <div class="rm-marker rm-marker-future"></div>
-              <div class="rm-content">
-                <div class="rm-phase">v1.0 · Planned</div>
-                <h3>Plugin system and documentation</h3>
-                <p>Structured plugin interface for custom components and renderers. Full API documentation, quick-start guides, and integration examples for common native use cases.</p>
-              </div>
-            </div>
-            <div class="rm-item">
-              <div class="rm-marker rm-marker-future"></div>
-              <div class="rm-content">
-                <div class="rm-phase">v1.x · Future</div>
-                <h3>Additional render backends</h3>
-                <p>Vulkan and Metal backends for platform-specific optimization. Experimental WebGPU target for cross-environment deployment. Community plugin registry.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ═══════════════════════ PHILOSOPHY ═══════════════════════ -->
-        <section class="section section-dark" id="philosophy">
-          <div class="section-tag reveal">
-            <span>11</span>
-            <span>Philosophy</span>
-          </div>
-
-          <div class="philosophy-grid reveal">
-            <div class="phil-text">
-              <p class="eyebrow">Philosophy</p>
-              <h2>A deliberate engine for real software work.</h2>
-              <p class="section-text">
-                Framm is guided by the belief that software tools should empower developers rather than constrain them. The engine is built around a clear set of principles: flexibility without losing structure, performance without sacrificing readability, and extensibility without adding unnecessary complexity.
-              </p>
-              <p class="section-text">
-                Every design decision within Framm is made with the goal of improving the developer's workflow and reducing friction during development. The engine does not try to do everything. Instead, it tries to do the right things exceptionally well, and provide clean seams where you can take over.
-              </p>
-              <p class="section-text">
-                The long-term vision is to become a reliable and widely adopted foundation for both small and large native projects. That means prioritizing stability, consistency, and continuous improvement, while staying responsive to real-world developer needs and avoiding the accumulation of legacy complexity.
-              </p>
-            </div>
-
-            <div class="principles-card">
-              <div class="pillar">
-                <div class="pillar-num">I</div>
-                <div class="pillar-body">
-                  <strong>Clarity first</strong>
-                  <p>Clear APIs and predictable layout behavior reduce cognitive load and improve maintainability. Surprise is a failure mode, not a feature.</p>
-                </div>
-              </div>
-              <div class="pillar">
-                <div class="pillar-num">II</div>
-                <div class="pillar-body">
-                  <strong>Performance always</strong>
-                  <p>Optimized rendering and disciplined memory usage keep interfaces smooth under load. Performance is not an afterthought — it is the foundation.</p>
-                </div>
-              </div>
-              <div class="pillar">
-                <div class="pillar-num">III</div>
-                <div class="pillar-body">
-                  <strong>Engineered for growth</strong>
-                  <p>A modular architecture makes it easier to extend Framm without disrupting the core system. New capability should not cost existing stability.</p>
-                </div>
-              </div>
-              <div class="pillar">
-                <div class="pillar-num">IV</div>
-                <div class="pillar-body">
-                  <strong>Developer respect</strong>
-                  <p>Framm assumes competence. It provides primitives and honest abstractions rather than opinionated magic that hides the system from you.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ═══════════════════════ CTA ═══════════════════════ -->
-        <section class="section cta-section" id="cta">
-          <div class="cta-inner reveal">
-            <div class="cta-eyebrow">
-              <span class="dot-live"></span>
-              <span>Active development</span>
-            </div>
-            <h2>Framm is being built for developers who demand the best from their tools.</h2>
-            <p>Follow progress on GitHub, star the repository to stay informed, or open an issue to share your use case. The engine is shaped by real-world developer needs.</p>
-            <div class="cta-actions">
-              <a class="btn btn-primary" href="https://github.com/GitAvaneesh/framm" target="_blank">View on GitHub ↗</a>
-              <a class="btn btn-ghost" href="#overview">Back to top</a>
-            </div>
-          </div>
-        </section>
-
-      </main>
-
-      <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
-      <footer class="footer" id="github">
-        <div class="footer-inner">
-          <div class="footer-brand">
-            <span class="brand-icon">▲</span>
-            <span class="footer-name">Framm</span>
-            <p class="footer-tagline">A modern, performance-oriented UI engine for C++. Currently in active development.</p>
-          </div>
-
-          <div class="footer-cols">
-            <div class="footer-col">
-              <strong>Engine</strong>
-              <a href="#problem">Problem</a>
-              <a href="#approach">Approach</a>
-              <a href="#performance">Performance</a>
-              <a href="#architecture">Architecture</a>
-            </div>
-            <div class="footer-col">
-              <strong>Design</strong>
-              <a href="#system">Layout</a>
-              <a href="#experience">Developer experience</a>
-              <a href="#showcase">Showcase</a>
-              <a href="#philosophy">Philosophy</a>
-            </div>
-            <div class="footer-col">
-              <strong>Project</strong>
-              <a href="#roadmap">Roadmap</a>
-              <a href="#code">Code preview</a>
-              <a href="https://github.com/GitAvaneesh/framm" target="_blank">GitHub ↗</a>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;">
+              <div class="status-dot status-planned"></div>
+              <span style="color:var(--text-2);">Raspberry Pi</span>
             </div>
           </div>
         </div>
-        <div class="footer-bottom">
-          <span>Framm · Built in C++ · Open source</span>
-          <span>Coming soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     STRUCTURE
+══════════════════════════════════════════════════════════ -->
+<section id="structure" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="label">Project Layout</div>
+      <h2 class="display-lg section-title">1,200+ files.<br>Every one matters.</h2>
+      <p class="section-sub">Enterprise-grade directory structure. Headers and implementations separated, shaders per backend, tests alongside source, tooling built in.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="file-tree">
+        <div class="file-tree-header">
+          <div class="file-tree-title">
+            <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4l5-3 7 3v8l-7 3-7-3V4z"/></svg>
+            framm/ — full project structure
+          </div>
+          <div class="badge badge-dim">1,200+ files</div>
         </div>
-      </footer>
+        <div class="file-tree-body">
+<span class="ft-dir">framm/</span>
+  <span class="ft-indent"><span class="ft-dir">.github/workflows/</span></span>
+  <span class="ft-indent">  <span class="ft-cfg">ci.yml · cd.yml · release.yml · codeql.yml · benchmarks.yml</span></span>
+  <span class="ft-indent"><span class="ft-dir">cmake/modules/</span></span>
+  <span class="ft-indent">  <span class="ft-cfg">FindHarfBuzz.cmake · FindVulkan.cmake · FindICU.cmake · FindFFmpeg.cmake</span></span>
+  <span class="ft-indent"><span class="ft-dir">cmake/toolchains/</span></span>
+  <span class="ft-indent">  <span class="ft-cfg">linux-gcc.cmake · windows-msvc.cmake · android.cmake · wasm-emscripten.cmake</span></span>
+<br>
+  <span class="ft-indent"><span class="ft-dir">include/framm/</span>  <span class="ft-comment">← all public headers (~400 files)</span></span>
+  <span class="ft-indent">  <span class="ft-h">framm.h</span>  <span class="ft-comment">← master include</span></span>
+  <span class="ft-indent">  <span class="ft-dir">core/</span>      <span class="ft-h">application.h · scene_graph.h · dirty_tracker.h · signal.h · thread_pool.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">memory/</span>    <span class="ft-h">pool_allocator.h · arena_allocator.h · ring_buffer.h · string_pool.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">layout/</span>    <span class="ft-h">flex.h · grid.h · constraint_solver.h · rtl_layout.h · virtual_layout.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">style/</span>     <span class="ft-h">style_sheet.h · style_cascade.h · color.h · gradient.h · pseudo_state.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">theme/</span>     <span class="ft-h">theme_tokens.h · theme_dark.h · theme_light.h · theme_system.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">render/</span>    <span class="ft-h">renderer.h · batch.h · shader.h · texture_atlas.h · compositor.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">render/backends/opengl/</span>  <span class="ft-h">opengl_backend.h · opengl_shader.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">render/backends/vulkan/</span>  <span class="ft-h">vulkan_backend.h · vulkan_pipeline.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">render/backends/dx11/</span>    <span class="ft-h">dx11_backend.h · dx11_shader.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">render/backends/dx12/</span>    <span class="ft-h">dx12_backend.h · dx12_command_list.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">render/backends/webgpu/</span>  <span class="ft-h">webgpu_backend.h · webgpu_pipeline.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">render/backends/software/</span> <span class="ft-h">software_rasterizer.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">events/</span>    <span class="ft-h">event_bus.h · mouse_event.h · keyboard_event.h · gesture_event.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">text/</span>      <span class="ft-h">text_shaper.h · bidi.h · font_fallback.h · glyph_atlas.h · rich_text.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">unicode/</span>   <span class="ft-h">emoji.h · flag.h · zwj_sequence.h · normalization.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">i18n/</span>      <span class="ft-h">locale.h · translator.h · po_loader.h · plural_rules.h · rtl.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">anim/</span>      <span class="ft-h">spring.h · keyframe.h · timeline.h · transition.h · easing.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">widgets/button/</span>   <span class="ft-h">button.h · icon_button.h · fab.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">widgets/input/</span>    <span class="ft-h">text_input.h · number_input.h · otp_input.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">widgets/picker/</span>   <span class="ft-h">color_picker.h · date_picker.h · calendar_picker.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">charts/line/</span>  <span class="ft-h">line_chart.h · area_chart.h · spline_chart.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">charts/bar/</span>   <span class="ft-h">bar_chart.h · stacked_bar.h · waterfall_chart.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">charts/financial/</span> <span class="ft-h">candlestick_chart.h · ohlc_chart.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">charts/realtime/</span>  <span class="ft-h">live_chart.h · stream_chart.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">platform/</span>  <span class="ft-h">dialog/ · tray/ · clipboard/ · dnd/ · screen/ · shell/</span></span>
+  <span class="ft-indent">  <span class="ft-dir">a11y/</span>      <span class="ft-h">accessible.h · focus_manager.h · screen_reader.h ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">net/</span>       <span class="ft-h">http_client.h · websocket.h · sse_client.h ···</span></span>
+<br>
+  <span class="ft-indent"><span class="ft-dir">src/</span>  <span class="ft-comment">← implementations (~400 .cpp files, mirrors include/)</span></span>
+  <span class="ft-indent">  <span class="ft-dir">platform/linux/</span>    <span class="ft-cpp">linux_window.cpp · x11/ · wayland/</span></span>
+  <span class="ft-indent">  <span class="ft-dir">platform/windows/</span>  <span class="ft-cpp">win_window.cpp · win_dialog.cpp · win_dpi.cpp ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">platform/android/</span>  <span class="ft-cpp">android_jni.cpp · android_touch.cpp ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">platform/wasm/</span>     <span class="ft-cpp">wasm_window.cpp · wasm_canvas.cpp ···</span></span>
+<br>
+  <span class="ft-indent"><span class="ft-dir">shaders/</span>  <span class="ft-comment">← per-backend GPU programs</span></span>
+  <span class="ft-indent">  <span class="ft-dir">opengl/</span>    <span class="ft-cfg">rect.vert · rect.frag · text.vert · sdf.frag ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">vulkan/</span>    <span class="ft-cfg">rect.vert.spv · text.frag.spv ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">dx11/ dx12/</span> <span class="ft-cfg">rect.hlsl · text.hlsl ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">webgpu/</span>    <span class="ft-cfg">rect.wgsl · text.wgsl ···</span></span>
+<br>
+  <span class="ft-indent"><span class="ft-dir">tests/</span></span>
+  <span class="ft-indent">  <span class="ft-dir">unit/</span>         <span class="ft-cpp">test_flex.cpp · test_bidi.cpp · test_emoji.cpp ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">integration/</span>  <span class="ft-cpp">test_full_window.cpp · test_i18n_rtl.cpp ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">snapshot/</span>     <span class="ft-cfg">button_default.png · chart_line.png ···</span></span>
+  <span class="ft-indent">  <span class="ft-dir">benchmarks/</span>   <span class="ft-cpp">bench_layout.cpp · bench_text_shaper.cpp ···</span></span>
+<br>
+  <span class="ft-indent"><span class="ft-dir">examples/</span>  <span class="ft-comment">← 20 focused examples + 3 full demo apps</span></span>
+  <span class="ft-indent">  <span class="ft-dir">07_i18n/</span>  <span class="ft-cfg">en.po · ar.po · hi.po · zh.po</span></span>
+  <span class="ft-indent">  <span class="ft-dir">apps/dashboard/</span>   <span class="ft-cpp">metric_card.cpp · dashboard_layout.cpp</span></span>
+  <span class="ft-indent">  <span class="ft-dir">apps/code_editor/</span> <span class="ft-cpp">editor_widget.cpp · syntax_highlight.cpp</span></span>
+<br>
+  <span class="ft-indent"><span class="ft-dir">tools/designer/</span>  <span class="ft-comment">← visual drag-and-drop UI designer (.fui files)</span></span>
+  <span class="ft-indent"><span class="ft-dir">tools/inspector/</span> <span class="ft-comment">← runtime widget inspector overlay</span></span>
+  <span class="ft-indent"><span class="ft-dir">tools/profiler/</span>  <span class="ft-comment">← frame timeline + draw call profiler</span></span>
+  <span class="ft-indent"><span class="ft-dir">tools/hotreload/</span> <span class="ft-comment">← file watcher + live reload server</span></span>
+<br>
+  <span class="ft-indent"><span class="ft-dir">bindings/python/</span>  <span class="ft-cfg">pyframm/ · setup.py · core.pyi · widgets.pyi</span></span>
+  <span class="ft-indent"><span class="ft-dir">bindings/rust/</span>    <span class="ft-cfg">Cargo.toml · src/lib.rs · src/widgets.rs</span></span>
+  <span class="ft-indent"><span class="ft-dir">bindings/wasm/</span>    <span class="ft-cfg">framm.js · framm.d.ts</span></span>
+<br>
+  <span class="ft-indent"><span class="ft-dir">resources/fonts/</span>   <span class="ft-cfg">NotoSans · NotoColorEmoji · NotoSansArabic · NotoSansCJK ···</span></span>
+  <span class="ft-indent"><span class="ft-dir">resources/themes/</span>  <span class="ft-cfg">default-dark.json · default-light.json · high-contrast.json</span></span>
+  <span class="ft-indent"><span class="ft-dir">third_party/</span>   <span class="ft-comment">← harfbuzz · freetype · icu · ffmpeg · vulkan · spirv-cross ···</span></span>
+  <span class="ft-indent"><span class="ft-dir">packaging/</span>     <span class="ft-cfg">vcpkg/ · conan/ · debian/ · rpm/ · arch/ · nix/</span></span>
+<br>
+  <span class="ft-indent"><span class="ft-cfg">CMakeLists.txt · CMakePresets.json · .clang-format · .clang-tidy</span></span>
+  <span class="ft-indent"><span class="ft-md">LICENSE · README.md · CHANGELOG.md · SECURITY.md · CODE_OF_CONDUCT.md</span></span>
+        </div>
+      </div>
 
-    </div><!-- /page-shell -->
+      <div class="structure-stats">
+        <div class="struct-stat reveal">
+          <div class="struct-stat-val"><span class="accent" data-count="1200" data-suffix="+" data-decimals="0">1200+</span></div>
+          <div class="struct-stat-label">Total files</div>
+        </div>
+        <div class="struct-stat reveal reveal-delay-1">
+          <div class="struct-stat-val"><span class="accent" data-count="50" data-decimals="0">50+</span></div>
+          <div class="struct-stat-label">Namespaces</div>
+        </div>
+        <div class="struct-stat reveal reveal-delay-2">
+          <div class="struct-stat-val"><span class="accent" data-count="20" data-decimals="0">20</span></div>
+          <div class="struct-stat-label">Code examples</div>
+        </div>
+        <div class="struct-stat reveal reveal-delay-3">
+          <div class="struct-stat-val"><span class="accent" data-count="6" data-decimals="0">6</span></div>
+          <div class="struct-stat-label">Package managers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script src="script.js"></script>
-  </body>
+<!-- ══════════════════════════════════════════════════════════
+     COMPARE
+══════════════════════════════════════════════════════════ -->
+<section id="compare" class="section">
+  <div class="container">
+    <div class="section-header section-header-centered reveal">
+      <div class="label">Comparison</div>
+      <h2 class="display-lg section-title">Framm vs Qt</h2>
+      <p class="section-sub">Qt is 30 years old and incredible. Framm is younger and built differently. Here's where things stand.</p>
+    </div>
+
+    <div class="compare-table-wrap reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="highlight-col">
+              <span style="display:flex;align-items:center;gap:8px;">
+                <img src="logo.png" width="16" height="16" alt="" />
+                Framm
+              </span>
+            </th>
+            <th>Qt 6</th>
+            <th>Dear ImGui</th>
+            <th>wxWidgets</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>License</td>
+            <td class="highlight-col"><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>MIT (fully open)</span></td>
+            <td><span class="cmp-partial"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="6" x2="10" y2="6"/></svg>LGPL / Commercial</span></td>
+            <td><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>MIT</span></td>
+            <td><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>wxWindows</span></td>
+          </tr>
+          <tr>
+            <td>Render backends</td>
+            <td class="highlight-col"><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>5 (Open only)</span></td>
+            <td><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>6 (incl. Metal)</span></td>
+            <td><span class="cmp-partial"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="6" x2="10" y2="6"/></svg>GL/Vulkan/DX11</span></td>
+            <td><span class="cmp-partial"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="6" x2="10" y2="6"/></svg>Platform native</span></td>
+          </tr>
+          <tr>
+            <td>Charts module</td>
+            <td class="highlight-col"><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Built-in (planned)</span></td>
+            <td><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>QtCharts (add-on)</span></td>
+            <td><span class="cmp-no"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>No</span></td>
+            <td><span class="cmp-no"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>No</span></td>
+          </tr>
+          <tr>
+            <td>RTL + BiDi text</td>
+            <td class="highlight-col"><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Yes</span></td>
+            <td><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Yes</span></td>
+            <td><span class="cmp-no"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>No</span></td>
+            <td><span class="cmp-partial"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="6" x2="10" y2="6"/></svg>Partial</span></td>
+          </tr>
+          <tr>
+            <td>Emoji + Flags</td>
+            <td class="highlight-col"><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Full color emoji</span></td>
+            <td><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Yes</span></td>
+            <td><span class="cmp-no"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>No</span></td>
+            <td><span class="cmp-no"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>No</span></td>
+          </tr>
+          <tr>
+            <td>Accessibility (a11y)</td>
+            <td class="highlight-col"><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Full (planned)</span></td>
+            <td><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Excellent</span></td>
+            <td><span class="cmp-no"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>None</span></td>
+            <td><span class="cmp-partial"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="6" x2="10" y2="6"/></svg>Basic</span></td>
+          </tr>
+          <tr>
+            <td>Runtime size</td>
+            <td class="highlight-col"><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>4.1 MB</span></td>
+            <td><span class="cmp-no"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>50–150 MB</span></td>
+            <td><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>&lt; 1 MB</span></td>
+            <td><span class="cmp-partial"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="6" x2="10" y2="6"/></svg>~8 MB</span></td>
+          </tr>
+          <tr>
+            <td>Startup time</td>
+            <td class="highlight-col"><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>12 ms</span></td>
+            <td><span class="cmp-partial"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="6" x2="10" y2="6"/></svg>200–500 ms</span></td>
+            <td><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Instant</span></td>
+            <td><span class="cmp-partial"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="6" x2="10" y2="6"/></svg>~150 ms</span></td>
+          </tr>
+          <tr>
+            <td>WebAssembly target</td>
+            <td class="highlight-col"><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Planned</span></td>
+            <td><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Yes (Qt for WASM)</span></td>
+            <td><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Yes</span></td>
+            <td><span class="cmp-no"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>No</span></td>
+          </tr>
+          <tr>
+            <td>Commercial license required</td>
+            <td class="highlight-col"><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Never</span></td>
+            <td><span class="cmp-no"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>For closed source</span></td>
+            <td><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Never</span></td>
+            <td><span class="cmp-yes"><svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 4 9 11 2"/></svg>Never</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     GET STARTED
+══════════════════════════════════════════════════════════ -->
+<section id="getstarted" class="section">
+  <div class="container">
+    <div class="section-header section-header-centered reveal">
+      <div class="label">Installation</div>
+      <h2 class="display-lg section-title">Get Framm in<br>under a minute.</h2>
+      <p class="section-sub">CMake, vcpkg, Conan — pick your workflow. All dependencies vendor-pinned for reproducible builds.</p>
+    </div>
+
+    <div class="reveal" style="max-width:760px; margin:0 auto;">
+
+      <div class="install-tabs">
+        <button class="install-tab active" data-tab="cmake">CMake</button>
+        <button class="install-tab" data-tab="vcpkg">vcpkg</button>
+        <button class="install-tab" data-tab="conan">Conan</button>
+        <button class="install-tab" data-tab="git">Git clone</button>
+      </div>
+
+      <!-- CMake -->
+      <div class="install-panel active" id="panel-cmake">
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-label">CMakeLists.txt</span>
+            <button class="code-block-copy">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="9" height="9" rx="1"/><path d="M3 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre>cmake_minimum_required(VERSION 3.20)
+project(my_app LANGUAGES CXX)
+
+include(FetchContent)
+FetchContent_Declare(
+  framm
+  GIT_REPOSITORY https://github.com/GitAvaneesh/framm.git
+  GIT_TAG        v0.2.0
+)
+FetchContent_MakeAvailable(framm)
+
+add_executable(my_app main.cpp)
+target_link_libraries(my_app PRIVATE framm::framm)</pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-label">Build</span>
+            <button class="code-block-copy">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="9" height="9" rx="1"/><path d="M3 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre>cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel</pre>
+        </div>
+      </div>
+
+      <!-- vcpkg -->
+      <div class="install-panel" id="panel-vcpkg">
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-label">vcpkg.json</span>
+            <button class="code-block-copy">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="9" height="9" rx="1"/><path d="M3 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre>{
+  "name": "my-app",
+  "version": "1.0.0",
+  "dependencies": [
+    "framm"
+  ]
+}</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-label">Terminal</span>
+            <button class="code-block-copy">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="9" height="9" rx="1"/><path d="M3 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre>vcpkg install framm
+cmake -B build -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+cmake --build build</pre>
+        </div>
+      </div>
+
+      <!-- Conan -->
+      <div class="install-panel" id="panel-conan">
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-label">conanfile.txt</span>
+            <button class="code-block-copy">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="9" height="9" rx="1"/><path d="M3 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre>[requires]
+framm/0.2.0
+
+[generators]
+CMakeDeps
+CMakeToolchain</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-label">Terminal</span>
+            <button class="code-block-copy">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="9" height="9" rx="1"/><path d="M3 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre>conan install . --build=missing
+cmake -B build -DCMAKE_TOOLCHAIN_FILE=build/conan_toolchain.cmake
+cmake --build build</pre>
+        </div>
+      </div>
+
+      <!-- Git clone -->
+      <div class="install-panel" id="panel-git">
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-label">Terminal</span>
+            <button class="code-block-copy">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="9" height="9" rx="1"/><path d="M3 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre>git clone https://github.com/GitAvaneesh/framm.git
+cd framm
+cmake -B build -DCMAKE_BUILD_TYPE=Release -DFRAMM_BUILD_EXAMPLES=ON
+cmake --build build --parallel
+./build/examples/01_hello_world/hello_world</pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     CTA
+══════════════════════════════════════════════════════════ -->
+<section id="cta" class="section">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-glow"></div>
+      <div class="reveal">
+        <div class="label" style="justify-content:center;display:flex;margin-bottom:16px;">Open Source · MIT License</div>
+        <h2 class="display-lg cta-title">
+          Ready to build something<br><span class="accent-text">that actually runs fast?</span>
+        </h2>
+        <p class="cta-sub">Framm is free forever. No paid tiers, no feature gates, no corporate lock-in. Fork it, extend it, ship with it.</p>
+        <div class="cta-actions">
+          <a href="https://github.com/GitAvaneesh/framm" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
+            <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+            View on GitHub
+          </a>
+          <a href="https://gitavaneesh.github.io/knowframm" target="_blank" class="btn btn-ghost btn-lg">
+            <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4.5h12M2 8h8M2 11.5h10"/></svg>
+            Read the Docs
+          </a>
+          <a href="#getstarted" class="btn btn-outline btn-lg">
+            <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 6 2 8 4 10"/><polyline points="12 6 14 8 12 10"/><line x1="9" y1="3" x2="7" y2="13"/></svg>
+            Quick Start
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════ -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="logo.png" alt="Framm" width="24" height="24" />
+          Framm
+        </div>
+        <p class="footer-tagline">A modern, performance-first C++ UI engine. Open source, forever.</p>
+        <div style="margin-top:16px;display:flex;gap:8px;">
+          <span class="badge badge-accent">MIT License</span>
+          <span class="badge badge-dim">C++17</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Project</div>
+        <div class="footer-links">
+          <a href="https://github.com/GitAvaneesh/framm" target="_blank" class="footer-link">
+            <svg viewBox="0 0 12 12" width="11" fill="currentColor"><path d="M6 0C2.69 0 0 2.69 0 6c0 2.65 1.72 4.9 4.1 5.69.3.05.41-.13.41-.28 0-.14-.01-.61-.01-1.12-1.51.28-1.9-.37-2.02-.71-.07-.17-.36-.71-.61-.85-.21-.11-.51-.39-.01-.4.47-.01.81.44.92.61.54.91 1.4.65 1.75.49.05-.39.21-.65.38-.8-1.33-.15-2.73-.67-2.73-2.96 0-.65.23-1.19.61-1.61-.06-.15-.27-.76.06-1.59 0 0 .5-.16 1.65.62.48-.13.99-.2 1.5-.2s1.02.07 1.5.2c1.15-.78 1.65-.62 1.65-.62.33.83.12 1.44.06 1.59.38.42.61.96.61 1.61 0 2.3-1.4 2.81-2.73 2.96.22.19.41.54.41 1.11 0 .8-.01 1.45-.01 1.65 0 .16.11.34.41.28C10.28 10.9 12 8.65 12 6c0-3.31-2.69-6-6-6Z"/></svg>
+            Source Code
+          </a>
+          <a href="https://gitavaneesh.github.io/knowframm" target="_blank" class="footer-link">
+            <svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="5"/><path d="M4 6c0-2.2.7-4 2-4s2 1.8 2 4-.7 4-2 4-2-1.8-2-4Z"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            Website
+          </a>
+          <a href="https://github.com/GitAvaneesh/framm/releases" target="_blank" class="footer-link">
+            <svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="2 8 6 2 10 8"/><line x1="6" y1="2" x2="6" y2="10"/></svg>
+            Releases
+          </a>
+          <a href="https://github.com/GitAvaneesh/framm/issues" target="_blank" class="footer-link">
+            <svg viewBox="0 0 12 12" width="11" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="5"/><line x1="6" y1="4" x2="6" y2="6"/><circle cx="6" cy="8.5" r="0.5" fill="currentColor"/></svg>
+            Issues
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Docs</div>
+        <div class="footer-links">
+          <a href="#getstarted" class="footer-link">Quick Start</a>
+          <a href="#architecture" class="footer-link">Architecture</a>
+          <a href="#namespaces" class="footer-link">Namespaces</a>
+          <a href="#backends" class="footer-link">Backends</a>
+          <a href="#structure" class="footer-link">File Structure</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Features</div>
+        <div class="footer-links">
+          <a href="#features" class="footer-link">Charts</a>
+          <a href="#features" class="footer-link">i18n + RTL</a>
+          <a href="#features" class="footer-link">Emoji + Flags</a>
+          <a href="#features" class="footer-link">Accessibility</a>
+          <a href="#features" class="footer-link">Animations</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Community</div>
+        <div class="footer-links">
+          <a href="https://github.com/GitAvaneesh/framm/blob/main/CONTRIBUTING.md" target="_blank" class="footer-link">Contributing</a>
+          <a href="https://github.com/GitAvaneesh/framm/blob/main/CODE_OF_CONDUCT.md" target="_blank" class="footer-link">Code of Conduct</a>
+          <a href="https://github.com/GitAvaneesh/framm/blob/main/SECURITY.md" target="_blank" class="footer-link">Security</a>
+          <a href="https://github.com/GitAvaneesh/framm/blob/main/CHANGELOG.md" target="_blank" class="footer-link">Changelog</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        &copy; 2024–2025 <a href="https://github.com/GitAvaneesh" target="_blank">Avaneesh</a> &amp; contributors.
+        Built with care, shipped open source.
+        <span style="margin:0 8px;color:var(--border-2);">·</span>
+        <a href="https://github.com/GitAvaneesh/framm" target="_blank">github.com/GitAvaneesh/framm</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://github.com/GitAvaneesh/framm" target="_blank" class="social-btn" aria-label="GitHub">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        </a>
+        <a href="https://gitavaneesh.github.io/knowframm" target="_blank" class="social-btn" aria-label="Docs">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="7"/><path d="M5 8c0-3 1-5.5 3-5.5S11 5 11 8s-1 5.5-3 5.5S5 11 5 8Z"/><line x1="1" y1="8" x2="15" y2="8"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 10 8 6 12 10"/></svg>
+</button>
+
+<script src="script.js"></script>
+</body>
 </html>
